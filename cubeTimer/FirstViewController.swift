@@ -12,6 +12,7 @@ import QuartzCore
 class FirstViewController: UIViewController {
 	@IBOutlet var longPress: UILongPressGestureRecognizer!
 	@IBOutlet weak var scrambleLabel: UILabel!
+	@IBOutlet var panPress: UIPanGestureRecognizer!
 	@IBOutlet var timeLabel: UILabel!
 	var timer:Timer = Timer()
 	var millis:Int = 0
@@ -119,6 +120,25 @@ class FirstViewController: UIViewController {
 		
 		return scramble.joined(separator: " ")
 	}
+	
+	@IBAction func panGestured(_ sender: UIPanGestureRecognizer) {
+		if sender.state == .ended {
+			if sender.velocity(in: self.view).x < 0 {
+				let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the last time?", preferredStyle: .alert)
+				alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+//					print("Dropping last")
+					self.tbc.data.popLast()
+					return;
+				}))
+				alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+				self.present(alert, animated: true, completion: nil)
+				
+			} else if sender.velocity(in: self.view).x > 0 {
+				scrambleLabel.text = generateScramble()
+			}
+		}
+	}
+
 
 
 }

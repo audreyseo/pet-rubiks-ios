@@ -51,7 +51,7 @@ class SecondViewController: UITableViewController {
 				activeData = self.data
 				self.data = tbc.data
 				
-				if oldSize < self.data.count && oldSize > 0 {
+				if oldSize != self.data.count && oldSize > 0 {
 					performInsertion()
 				} else {
 					activeData = self.data

@@ -47,11 +47,13 @@
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="viy-hG-A1T" appends="YES" id="dzp-tB-bKx"/>
                             <outletCollection property="gestureRecognizers" destination="WQB-na-xOi" appends="YES" id="uxC-2i-uga"/>
+                            <outletCollection property="gestureRecognizers" destination="Al8-rt-fQx" appends="YES" id="o4c-ab-Q3m"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="longPress" destination="viy-hG-A1T" id="OFq-Xj-7sG"/>
+                        <outlet property="panPress" destination="Al8-rt-fQx" id="xDV-CM-Ue9"/>
                         <outlet property="scrambleLabel" destination="3nB-BG-fdm" id="9OV-cD-S1I"/>
                         <outlet property="timeLabel" destination="mkE-zW-HT4" id="7gJ-VF-2s0"/>
                     </connections>
@@ -67,6 +69,11 @@
                         <action selector="stopTimer:" destination="9pv-A4-QxB" id="fPF-am-PM2"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Al8-rt-fQx">
+                    <connections>
+                        <action selector="panGestured:" destination="9pv-A4-QxB" id="3bb-aS-4bW"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
