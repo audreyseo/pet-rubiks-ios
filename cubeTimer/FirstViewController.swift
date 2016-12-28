@@ -30,6 +30,7 @@ class FirstViewController: UIViewController {
 //		timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(FirstViewController.update), userInfo: nil, repeats: true)
 		self.view.backgroundColor = UIColor.black
 		scrambleLabel.textColor = UIColor.white
+		scrambleLabel.text = generateScramble()
 		timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 87.0, weight: 0.02)
 		timeLabel.textColor = UIColor.white
 		
@@ -45,7 +46,7 @@ class FirstViewController: UIViewController {
 	}
 	@IBAction func startStopTimer(_ sender: UILongPressGestureRecognizer) {
 		if sender.state == .ended {
-			timer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+			timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(update), userInfo: nil, repeats: true)
 			t1 = mach_absolute_time()
 			isTiming = true
 		}
@@ -56,6 +57,7 @@ class FirstViewController: UIViewController {
 		if hasTabControl && isTiming {
 			self.tbc.data += [millis]
 			isTiming = false
+			scrambleLabel.text = generateScramble()
 		}
 //		timings += [millis]
 		millis = 0
@@ -87,6 +89,35 @@ class FirstViewController: UIViewController {
 		timeLabel.text = "\(seconds).\(millis0)\(millisR)"
 //		t1 = t2
 		
+	}
+	
+	
+	func generateScramble() -> String {
+		let length:Int = 25
+		let choices:[[String]] = [["R", "R'", "R2"], ["F", "F'", "F2"], ["U", "U'", "U2"], ["L", "L'", "L2"], ["B", "B'", "B2"], ["D", "D'", "D2"]]
+//		let types:[String] = [" ", "' ", "2 "]
+		var scrambleIndices:[[Int]] = [[Int]]()
+		var scramble:[String] = [String]()
+		
+//		let count = 0
+		
+		for i in 0...length - 1 {
+			var index1 = Int(arc4random_uniform(UInt32(choices.count)))
+			let index2 = Int(arc4random_uniform(UInt32(choices[index1].count)))
+			
+			if i > 0 {
+				while index1 == scrambleIndices[i - 1][0] {
+					index1 = Int(arc4random_uniform(UInt32(choices.count)))
+				}
+			}
+			scrambleIndices += [[index1, index2]]
+		}
+		
+		for i in 0...length - 1 {
+			scramble += [choices[scrambleIndices[i][0]][scrambleIndices[i][1]]]
+		}
+		
+		return scramble.joined(separator: " ")
 	}
 
 
