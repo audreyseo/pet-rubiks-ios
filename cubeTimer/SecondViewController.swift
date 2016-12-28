@@ -15,9 +15,11 @@ class SecondViewController: UITableViewController {
 	var activeData:[Int] = [Int]()
 	var oldSize:Int = 0
 	
+	var titles:[String] = ["Statistics", "Times"]
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationItem.title = "Menu"
+		navigationItem.title = "Statistics and Times"
 		
 		// Assigns the class MyCell to the type of cell that we use in the table view
 		tableView.register(StatsCell.self, forCellReuseIdentifier: "cellId")
@@ -41,17 +43,19 @@ class SecondViewController: UITableViewController {
 			self.tbc = self.tabBarController as! InfoSharingTabController
 			self.hasTabControl = true
 			
-			for i in 0...tbc.data.count - 1 {
-				print("Data \(i): \(tbc.data[i])")
-			}
-			oldSize = self.data.count
-			activeData = self.data
-			self.data = tbc.data
-			
-			if oldSize < self.data.count && oldSize > 0 {
-				performInsertion()
-			} else {
+			if tbc.data.count > 0 {
+				for i in 0...tbc.data.count - 1 {
+					print("Data \(i): \(tbc.data[i])")
+				}
+				oldSize = self.data.count
 				activeData = self.data
+				self.data = tbc.data
+				
+				if oldSize < self.data.count && oldSize > 0 {
+					performInsertion()
+				} else {
+					activeData = self.data
+				}
 			}
 		}
 	}
@@ -69,8 +73,22 @@ class SecondViewController: UITableViewController {
 		return myCell
 	}
 	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return titles.count
+	}
+	
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return titles[section]
+	}
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return activeData.count
+		if titles[section].contains("Statistics") {
+			return 0
+		} else if titles[section].contains("Times") {
+			return activeData.count
+		} else {
+			return 0
+		}
 	}
 	
 	func performInsertion() {
@@ -94,9 +112,9 @@ class SecondViewController: UITableViewController {
 						}
 					}
 					if (i >= originalSize) {
-						indexPaths.append(IndexPath(row: i, section: 0))
+						indexPaths.append(IndexPath(row: i, section: 1))
 					} else {
-						originalPaths.append(IndexPath(row: i, section: 0))
+						originalPaths.append(IndexPath(row: i, section: 1))
 					}
 				}
 				
@@ -126,9 +144,9 @@ class SecondViewController: UITableViewController {
 					}
 					
 					if (i >= newSize) {
-						indexPaths.append(IndexPath(row: i, section: 0))
+						indexPaths.append(IndexPath(row: i, section: 1))
 					} else {
-						originalPaths.append(IndexPath(row: i, section: 0))
+						originalPaths.append(IndexPath(row: i, section: 1))
 					}
 				}
 				
