@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/audreyseo/pet-rubiks-ios.png?label=ready&title=Ready)](https://waffle.io/audreyseo/pet-rubiks-ios)
 # Cube Timer
 ## About
 This is the iOS version of my web-based rubik's cube timer + Fridrich method guide for OLL (orientation of the last layer) and PLL (permutation of the last layer). The repo for my web project is [here][1].
