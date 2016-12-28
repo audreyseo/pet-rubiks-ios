@@ -15,10 +15,12 @@ class FirstViewController: UIViewController {
 	@IBOutlet var timeLabel: UILabel!
 	var timer:Timer = Timer()
 	var millis:Int = 0
-//	var isTiming:Bool = false
+	var hasTabControl:Bool = false
+	var isTiming:Bool = false
 //	var timings:[Int] = [Int]()
 	var longTouch:Bool = false
 	var t1:UInt64 = 0, t2:UInt64 = 0
+	var tbc:InfoSharingTabController = InfoSharingTabController()
 //	var link:CADisplayLink = CADisplayLink()
 
 	override func viewDidLoad() {
@@ -31,6 +33,10 @@ class FirstViewController: UIViewController {
 		timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 87.0, weight: 0.02)
 		timeLabel.textColor = UIColor.white
 		
+		if self.tabBarController != nil {
+			hasTabControl = true
+			self.tbc = self.tabBarController as! InfoSharingTabController
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -41,11 +47,16 @@ class FirstViewController: UIViewController {
 		if sender.state == .ended {
 			timer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(update), userInfo: nil, repeats: true)
 			t1 = mach_absolute_time()
+			isTiming = true
 		}
 	}
 
 	@IBAction func stopTimer(_ sender: Any) {
 		timer.invalidate()
+		if hasTabControl && isTiming {
+			self.tbc.data += [millis]
+			isTiming = false
+		}
 //		timings += [millis]
 		millis = 0
 	}
