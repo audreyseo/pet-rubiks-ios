@@ -39,6 +39,9 @@ class FirstViewController: UIViewController {
 		if self.tabBarController != nil {
 			hasTabControl = true
 			self.tbc = self.tabBarController as! InfoSharingTabController
+			if tbc.loadData() {
+				print("Already have data")
+			}
 		}
 	}
 
@@ -58,6 +61,7 @@ class FirstViewController: UIViewController {
 		timer.invalidate()
 		if hasTabControl && isTiming {
 			self.tbc.data += [millis]
+			tbc.saveData()
 			isTiming = false
 			scrambleLabel.text = generateScramble()
 		}
