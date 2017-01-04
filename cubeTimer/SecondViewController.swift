@@ -14,6 +14,7 @@ class SecondViewController: UITableViewController {
 	var data:[Int] = [Int]()
 	var activeData:[Int] = [Int]()
 	var oldSize:Int = 0
+	var conversion:TimeConversion = TimeConversion()
 	
 	var titles:[String] = ["Statistics", "Times"]
 	
@@ -68,7 +69,7 @@ class SecondViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! StatsCell
 		myCell.nameLabel.text = "\(indexPath.row + 1)"
-		myCell.statLabel.text = "\(activeData[indexPath.row])"
+		myCell.statLabel.text =  conversion.timeString(millis: activeData[indexPath.row]) //"\(activeData[indexPath.row])"
 		
 		return myCell
 	}

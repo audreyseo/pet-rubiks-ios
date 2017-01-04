@@ -14,6 +14,7 @@ class FirstViewController: UIViewController {
 	@IBOutlet weak var scrambleLabel: UILabel!
 	@IBOutlet var panPress: UIPanGestureRecognizer!
 	@IBOutlet var timeLabel: UILabel!
+	var converter:TimeConversion = TimeConversion()
 	var timer:Timer = Timer()
 	var millis:Int = 0
 	var hasTabControl:Bool = false
@@ -82,12 +83,13 @@ class FirstViewController: UIViewController {
 		
 		millis = Int(Float(elapsedNano) * 0.000001)
 		
-		let seconds = Int(Float(millis) / 1000.0)
-		let millisR = millis % 1000
+//		let seconds = Int(Float(millis) / 1000.0)
+//		let millisR = millis % 1000
 //		let seconds0 = (seconds < 10) ? "0" : ""
-		let millis0 = (millisR < 100) ? ((millisR < 10) ? "00" : "0") : ""
+//		let millis0 = (millisR < 100) ? ((millisR < 10) ? "00" : "0") : ""
 //		print("Millis: ", millisR)
-		timeLabel.text = "\(seconds).\(millis0)\(millisR)"
+		timeLabel.text = converter.timeString(millis: millis)
+//		timeLabel.text = "\(seconds).\(millis0)\(millisR)"
 //		t1 = t2
 		
 	}
@@ -102,7 +104,7 @@ class FirstViewController: UIViewController {
 		
 //		let count = 0
 		
-		for i in 0...length - 1 {
+		for i in 0..<length {
 			var index1 = Int(arc4random_uniform(UInt32(choices.count)))
 			let index2 = Int(arc4random_uniform(UInt32(choices[index1].count)))
 			
@@ -114,7 +116,7 @@ class FirstViewController: UIViewController {
 			scrambleIndices += [[index1, index2]]
 		}
 		
-		for i in 0...length - 1 {
+		for i in 0..<length {
 			scramble += [choices[scrambleIndices[i][0]][scrambleIndices[i][1]]]
 		}
 		

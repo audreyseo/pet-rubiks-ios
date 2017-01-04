@@ -44,27 +44,27 @@ class StatisticsCalc {
 	
 	func updateData(newData:[Int]) {
 		self.data = newData
-		count = self.data.count
+		self.count = self.data.count
 	}
 	
 	func calculate() {
-		stats["median"] = data.count >= 3 ? median() : 0.0
-		stats["mean"] = data.count >= 2 ? average() : 0.0
-		stats["3of5"] = data.count >= 5 ? last3of5() : 0.0
-		stats["last5"] = data.count >= 5 ? last5() : 0.0
-		stats["stdDev"] = data.count >= 2 ? standardDeviation() : 0.0
-		stats["var"] = data.count >= 2 ? variance() : 0.0
-		stats["last10"] = data.count >= 10 ? last10() : 0.0
-		stats["10of12"] = data.count >= 12 ? last10of12() : 0.0
-		stats["last100"] = data.count >= 100 ? last100() : 0.0
+		self.stats["median"] = self.data.count >= 3 ? self.median() : 0.0
+		self.stats["mean"] = self.data.count >= 2 ? self.average() : 0.0
+		self.stats["3of5"] = self.data.count >= 5 ? self.last3of5() : 0.0
+		self.stats["last5"] = self.data.count >= 5 ? self.last5() : 0.0
+		self.stats["stdDev"] = self.data.count >= 2 ? self.standardDeviation() : 0.0
+		self.stats["var"] = self.data.count >= 2 ? self.variance() : 0.0
+		self.stats["last10"] = self.data.count >= 10 ? self.last10() : 0.0
+		self.stats["10of12"] = self.data.count >= 12 ? self.last10of12() : 0.0
+		self.stats["last100"] = self.data.count >= 100 ? self.last100() : 0.0
 		
 	}
 	
 	func median() -> Double {
-		if data.count >= 3 {
+		if self.data.count >= 3 {
 			let sortedData:[Int] = self.data.sorted()
-			let count = sortedData.count
-			let median = Int(Float(count) / 2.0)
+			let sortedCount = sortedData.count
+			let median = Int(Float(sortedCount) / 2.0)
 			if count % 2 == 0 {
 				return (Double(sortedData[median] + sortedData[median])) / 2.0
 			} else {
@@ -76,11 +76,11 @@ class StatisticsCalc {
 	}
 	
 	func average() -> Double {
-		if data.count >= 2 {
+		if self.data.count >= 2 {
 			var total:Int = 0
 			
-			for i in 0...data.count - 1 {
-				total += data[i]
+			for i in 0...self.data.count - 1 {
+				total += self.data[i]
 			}
 			
 			return Double(total) / Double(data.count)
