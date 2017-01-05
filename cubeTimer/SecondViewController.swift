@@ -118,7 +118,13 @@ class SecondViewController: UITableViewController {
 			
 			
 			// Shares
-//			let activity = UIActivityViewController(activityItems: self.tbc.data, applicationActivities: nil)
+			let url:URL = URL(fileURLWithPath: "session_data.csv")
+			let activityObjects = [url]
+			let activity = UIActivityViewController(activityItems: activityObjects, applicationActivities: nil)
+			
+			let excludedActivities:[UIActivityType] = [.assignToContact, .openInIBooks, .postToFacebook, .postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToTencentWeibo, .saveToCameraRoll, .addToReadingList]
+			activity.excludedActivityTypes = excludedActivities
+			self.present(activity, animated: true, completion: nil)
 		})
 		
 		let editAction = UIAlertAction(title: "Edit", style: .default, handler: { action in
