@@ -9,10 +9,13 @@
 import UIKit
 
 class OLLViewController:UITableViewController {
-	
+	var images:[String] = Array(repeating: "", count: 58)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// do stuff here
+		for i in 1...58 {
+			images[i - 1] = "\(i)"
+		}
 	}
 }
