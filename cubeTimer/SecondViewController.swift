@@ -212,6 +212,9 @@ class SecondViewController: UITableViewController {
 			print("Responding to handler - edit")
 			
 			// Does editing stuff here
+			let next = self.storyboard?.instantiateViewController(withIdentifier: "editorVC")
+			next?.navigationItem.title = "Times Editor"
+			self.navigationController?.pushViewController(next!, animated: true)
 		})
 		
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

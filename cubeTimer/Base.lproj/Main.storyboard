@@ -113,7 +113,7 @@
         <!--Times Editor View Controller-->
         <scene sceneID="ZfN-2u-DAI">
             <objects>
-                <tableViewController id="fNW-GS-hjh" customClass="TimesEditorViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="editorVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fNW-GS-hjh" customClass="TimesEditorViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0lR-aX-FHa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

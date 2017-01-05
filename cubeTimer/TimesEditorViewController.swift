@@ -29,6 +29,6 @@ class TimesEditorViewController:UITableViewController {
 		
 		alert.addAction(clearAction)
 		alert.addAction(cancelAction)
-		
+		self.present(alert, animated: true, completion: nil)
 	}
 }
