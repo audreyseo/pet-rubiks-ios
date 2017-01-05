@@ -104,7 +104,13 @@ class SecondViewController: UITableViewController {
 			
 			do {
 //				let error = NSError()
-				try csvContents.write(toFile: "session_data.csv", atomically: true, encoding: String.Encoding.unicode)
+				let fileManager = FileManager()
+				if !fileManager.fileExists(atPath: "session_data.csv") {
+					fileManager.createFile(atPath: "session_data.csv", contents: csvContents.data(using: String.Encoding.unicode), attributes: nil)
+				} else {
+					try csvContents.write(toFile: "session_data.csv", atomically: true, encoding: String.Encoding.unicode)
+				}
+				print("It worked!")
 			} catch {
 				print("There was an error woops")
 			}
