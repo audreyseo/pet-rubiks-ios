@@ -102,12 +102,41 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="vXB-yK-Jzh"/>
                     <connections>
-                        <segue destination="cKS-CM-3xe" kind="show" id="7Y9-m4-mQ5"/>
+                        <segue destination="cKS-CM-3xe" kind="show" identifier="sessionSegue" id="7Y9-m4-mQ5"/>
+                        <segue destination="fNW-GS-hjh" kind="show" identifier="editorSegue" id="Osr-gz-KOQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6At-Im-KJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1604" y="-225"/>
+        </scene>
+        <!--Times Editor View Controller-->
+        <scene sceneID="ZfN-2u-DAI">
+            <objects>
+                <tableViewController id="fNW-GS-hjh" customClass="TimesEditorViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0lR-aX-FHa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oDM-EV-bdc">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDM-EV-bdc" id="SiE-PZ-w4j">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fNW-GS-hjh" id="Wih-lT-IfY"/>
+                            <outlet property="delegate" destination="fNW-GS-hjh" id="kFv-4f-utP"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKf-rf-g6g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2640" y="-4"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="39H-ty-dKW">
@@ -201,10 +230,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="454"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="Tax-eV-ymK">
             <objects>
-                <tableViewController id="cKS-CM-3xe" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="sessionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cKS-CM-3xe" customClass="SessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Pn-6A-ZrU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +256,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2n-cX-pff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623" y="-60"/>
+            <point key="canvasLocation" x="2623" y="-684"/>
         </scene>
         <!--Second-->
         <scene sceneID="cfj-30-VeL">
