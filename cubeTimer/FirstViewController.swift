@@ -55,13 +55,14 @@ class FirstViewController: UIViewController {
 	}
 	
 	func timeElapsed() -> Double {
-		return Double(mach_absolute_time() - timeTouchingStart) / (1000000000)
+		return elapsedNano(begin: timeTouchingStart) / pow(10, 9)
 	}
 	
 	func checkTimeElapsed() {
 		if timeTouchingStart >= 0 {
+//			print("Minimum Press Duration: \(minimumPressDur), \(timeElapsed())")
 			
-			if timeElapsed() > minimumPressDur && minimumPressDur > 0 {
+			if timeElapsed() > minimumPressDur && minimumPressDur > 0.0 {
 				print("Ready")
 				timeLabel.textColor = UIColor.green
 				colorTimer.invalidate()
@@ -97,6 +98,16 @@ class FirstViewController: UIViewController {
 		}
 //		timings += [millis]
 		millis = 0
+	}
+	
+	func elapsedNano(begin:UInt64, end:UInt64) -> Double {
+		var timeBaseInfo = mach_timebase_info_data_t()
+		mach_timebase_info(&timeBaseInfo)
+		return Double((end - begin) * UInt64(timeBaseInfo.numer) / UInt64(timeBaseInfo.denom))
+	}
+	
+	func elapsedNano(begin:UInt64) -> Double {
+		return elapsedNano(begin: begin, end: mach_absolute_time())
 	}
 	
 	
