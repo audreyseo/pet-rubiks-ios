@@ -50,7 +50,7 @@
                             <outletCollection property="gestureRecognizers" destination="Al8-rt-fQx" appends="YES" id="o4c-ab-Q3m"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="First" image="timer-icon" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="longPress" destination="viy-hG-A1T" id="OFq-Xj-7sG"/>
                         <outlet property="panPress" destination="Al8-rt-fQx" id="xDV-CM-Ue9"/>
@@ -175,7 +175,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
+        <image name="timer-icon" width="30" height="30"/>
     </resources>
 </document>
