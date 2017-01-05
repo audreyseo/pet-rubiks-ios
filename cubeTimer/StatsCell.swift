@@ -33,7 +33,8 @@ class StatsCell: UITableViewCell {
 		let label = UILabel()
 		label.text = "Sample"
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = UIFont.systemFont(ofSize: 14.0)
+//		label.font = UIFont.systemFont(ofSize: 14.0)
+		label.font = UIFont.monospacedDigitSystemFont(ofSize: 14.0, weight: 0.02)
 		return label
 	}()
 	

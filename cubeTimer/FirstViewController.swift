@@ -23,6 +23,10 @@ class FirstViewController: UIViewController {
 	var longTouch:Bool = false
 	var t1:UInt64 = 0, t2:UInt64 = 0
 	var tbc:InfoSharingTabController = InfoSharingTabController()
+	
+	var timeTouchingStart:UInt64 = 0
+	var colorTimer:Timer = Timer()
+	var minimumPressDur:Double = -1.0
 //	var link:CADisplayLink = CADisplayLink()
 
 	override func viewDidLoad() {
@@ -49,8 +53,34 @@ class FirstViewController: UIViewController {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
+	func timeElapsed() -> Double {
+		return Double(mach_absolute_time() - timeTouchingStart) / (1000000000)
+	}
+	
+	func checkTimeElapsed() {
+		if timeTouchingStart >= 0 {
+			
+			if timeElapsed() > minimumPressDur && minimumPressDur > 0 {
+				print("Ready")
+				timeLabel.textColor = UIColor.green
+				colorTimer.invalidate()
+			}
+		}
+	}
+	
 	@IBAction func startStopTimer(_ sender: UILongPressGestureRecognizer) {
+		if sender.state == .began {
+//			timeLabel.textColor = UIColor.red
+			timeTouchingStart = mach_absolute_time()
+			minimumPressDur = Double(sender.minimumPressDuration)
+			colorTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(checkTimeElapsed), userInfo: nil, repeats: true)
+		}
+		
+		
 		if sender.state == .ended {
+			minimumPressDur = -1.0
+			timeLabel.textColor = UIColor.white
 			timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(update), userInfo: nil, repeats: true)
 			t1 = mach_absolute_time()
 			isTiming = true

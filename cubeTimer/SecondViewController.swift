@@ -16,7 +16,7 @@ class SecondViewController: UITableViewController {
 	var oldSize:Int = 0
 	var conversion:TimeConversion = TimeConversion()
 	
-	var titles:[String] = ["Statistics", "Times"]
+	var titles:[String] = ["Statistics", "Times", ""]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -24,6 +24,7 @@ class SecondViewController: UITableViewController {
 		
 		// Assigns the class MyCell to the type of cell that we use in the table view
 		tableView.register(StatsCell.self, forCellReuseIdentifier: "cellId")
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "footerId")
 		
 		// Assigns the class Header to the type of header cell that we use
 //		tableView.register(Header.self, forHeaderFooterViewReuseIdentifier: "headerId")
@@ -59,6 +60,17 @@ class SecondViewController: UITableViewController {
 				}
 			}
 		}
+		
+		let footerView = UITableViewCell(style: .subtitle, reuseIdentifier: "footerId")
+//		footerView.nameLabel.text = ""
+		footerView.isOpaque = true
+		footerView.frame.size.height = 5.0
+		
+		// Need to delete either one of these but all I wanted is for the background to be normal hallelujah
+		self.tableView.backgroundColor = UIColor.groupTableViewBackground
+		self.view.backgroundColor = UIColor.groupTableViewBackground
+		self.tableView.tableFooterView = footerView
+		self.tableView.tableFooterView?.tintColor = UIColor.groupTableViewBackground
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -66,12 +78,29 @@ class SecondViewController: UITableViewController {
 		// Dispose of any resources that can be recreated.
 	}
 	
+	
+	// ======================================================================================================
+	// =							   TABLEVIEW DELEGATE & DATASOURCE METHODS								=
+	// ======================================================================================================
+	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! StatsCell
 		myCell.nameLabel.text = "\(indexPath.row + 1)"
 		myCell.statLabel.text =  conversion.timeString(millis: activeData[indexPath.row]) //"\(activeData[indexPath.row])"
 		
 		return myCell
+	}
+	
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let myCell = tableView.dequeueReusableCell(withIdentifier: "footerId")! as UITableViewCell
+		myCell.contentView.backgroundColor = UIColor.groupTableViewBackground
+		myCell.textLabel?.text = titles[section]
+		return myCell
+		
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,6 +120,15 @@ class SecondViewController: UITableViewController {
 			return 0
 		}
 	}
+	
+	override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return 50
+	}
+	
+	// ======================================================================================================
+	// =									  TABLEVIEW HELPER METHODS									    =
+	// ======================================================================================================
+
 	
 	func performInsertion() {
 		if (data.count >= 1) {
