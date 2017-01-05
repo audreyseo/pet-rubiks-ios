@@ -80,6 +80,49 @@ class SecondViewController: UITableViewController {
 	
 	
 	// ======================================================================================================
+	// =										 HELPER METHODS											    =
+	// ======================================================================================================
+	
+	// File
+	
+	func examineFolder() {
+		let fm = FileManager.default
+		let paths = (fm.urls(for: .documentDirectory, in: .allDomainsMask))
+		if paths.count > 0 {
+			for j in 0..<paths.count {
+				let path = paths[j].path
+				do {
+					
+					let items = try fm.contentsOfDirectory(atPath: path)
+					print("Printing out items, \(items.count), at path \(path)")
+					for i in 0..<items.count {
+						print("Found \(items[i])")
+					}
+				} catch {
+					// failed to read directory – bad permissions, perhaps?
+					print("Error, \(path)")
+				}
+			}
+		} else {
+			print("No paths.")
+		}
+	}
+	
+	func csvText() -> String {
+		var csvContents = ""
+		let csvColumns = ["time"]
+		csvContents.append(csvColumns.joined(separator: ","))
+		csvContents.append("\n")
+		var stringData:[String] = Array(repeating: "", count: self.tbc.data.count)
+		for i in 0..<self.tbc.data.count {
+			stringData[i] = self.conversion.timeString(millis: self.tbc.data[i])
+		}
+		csvContents.append(stringData.joined(separator: "\n"))
+		return csvContents
+	}
+	
+	
+	// ======================================================================================================
 	// =									TAB BAR CONTROLLER METHODS										=
 	// ======================================================================================================
 	
@@ -89,43 +132,63 @@ class SecondViewController: UITableViewController {
 			print("Responding to handler - share")
 		
 			// Does sharing stuff here
-			// Writes CSV file
 			
-			// keep it simple here - make string
-			var csvContents = ""
-			let csvColumns = ["time"]
-			csvContents.append(csvColumns.joined(separator: ","))
-			csvContents.append("\n")
-			var stringData:[String] = Array(repeating: "", count: self.tbc.data.count)
-			for i in 0..<self.tbc.data.count {
-				stringData[i] = self.conversion.timeString(millis: self.tbc.data[i])
-			}
-			csvContents.append(stringData.joined(separator: "\n"))
+			// -------------------------------Writes CSV file-------------------------------
 			
-			let fileManager = FileManager()
-			let fileFolder = String(describing: fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask))
+			// Keep it simple here - make string
+			let csvContents = self.csvText()
+			
+			// Writing CSV
+			
+			let fileManager = FileManager.default
+			let fileFolder = String(describing: (fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask))[0])
+//			let fileFolder = fileFolders
+			var fileUrl = URL(fileURLWithPath: "\(fileFolder)/session_data.csv", isDirectory: false)
+			let folderUrl = URL(fileURLWithPath: "\(fileFolder)", isDirectory: true)
+			
+			print("\nWorking directory: \(fileManager.currentDirectoryPath)")
+			
 			
 			do {
 //				let error = NSError()
 				
+				try fileManager.createDirectory(at: folderUrl.appendingPathComponent("cubeStuff"), withIntermediateDirectories: true, attributes: nil)
+				//print("New path: \(url)")
+				self.examineFolder()
+				let fullFolderPath = (folderUrl.appendingPathComponent("cubeStuff")).path
+				fileUrl = URL(fileURLWithPath:  "\(fullFolderPath)/session_data.csv", isDirectory: false)
 				
 				
-				fileManager.changeCurrentDirectoryPath(String(describing: fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)))
+				//fileManager.changeCurrentDirectoryPath(fileFolder)
 				
-				print("Changed directories")
-				if !fileManager.fileExists(atPath: "\(fileFolder)/session_data.csv") {
-					print("Creating file at path \(fileFolder)...")
-					fileManager.createFile(atPath: "\(fileFolder)/session_data.csv", contents: csvContents.data(using: String.Encoding.unicode), attributes: nil)
-					print("Created file.")
-					let files = try fileManager.contentsOfDirectory(atPath: "\(fileFolder)/")
+				//rint("Changed directories")
+				if !fileManager.fileExists(atPath: fileUrl.path) {
+					print("\nAttempting to create file at path \(fileUrl.path)...")
+					let myData = csvContents.data(using: String.Encoding.utf8)
+					let successful = fileManager.createFile(atPath: fileUrl.path, contents: nil, attributes: nil)
+					print("Created file: \(successful).")
+					print("File exists: \(fileManager.fileExists(atPath: fileUrl.path))")
+					let files = try fileManager.contentsOfDirectory(atPath: fullFolderPath)
+					print("\nExamining files at folder path \(fullFolderPath)")
+					print("Looking at \(files.count) # of files")
 					for i in 0..<files.count {
 						print("#\(i): \(files[i])")
 					}
+				} //else {
+					print("\nAttempting to write to file...")
+				
+				let file:FileHandle? = FileHandle(forWritingAtPath: fileUrl.path)
+				if file != nil {
+					print("Created file...")
+					file?.write(csvContents.data(using: String.Encoding.utf8)!)
+					file?.closeFile()
+					print("It worked!")
 				} else {
-					print("Writing to file...")
-					try csvContents.write(toFile: "\(fileFolder)/session_data.csv", atomically: true, encoding: String.Encoding.unicode)
+					print("Could not write to file.")
 				}
-				print("It worked!")
+				//try csvContents.write(toFile: fileUrl.path, atomically: true, encoding: String.Encoding.unicode)
+				//}
+				
 				
 			} catch {
 				print("There was an error woops")
@@ -133,10 +196,10 @@ class SecondViewController: UITableViewController {
 			
 			
 			
-			// Shares
-			let fileString = Bundle.main.path(forResource: "cubeTimer/session_data", ofType: "csv")
-			print("My file string: \(fileString)")
-			let url:URL = URL(fileURLWithPath: fileString!)
+			// -------------------------------Shares CSV File-------------------------------
+			let fileString = fileUrl.path
+			print("\nMy file string: \(fileString)")
+			let url:URL = URL(fileURLWithPath: fileString)
 			let activityObjects = [url]
 			let activity = UIActivityViewController(activityItems: activityObjects, applicationActivities: nil)
 			
@@ -158,6 +221,8 @@ class SecondViewController: UITableViewController {
 		alert.addAction(cancelAction)
 		self.present(alert, animated: true, completion: nil)
 	}
+	
+	
 	
 	
 	
