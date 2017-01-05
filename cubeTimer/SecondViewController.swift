@@ -29,7 +29,7 @@ class SecondViewController: UITableViewController {
 		// Assigns the class Header to the type of header cell that we use
 //		tableView.register(Header.self, forHeaderFooterViewReuseIdentifier: "headerId")
 		
-//		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Choose Hall", style: .plain, target: self, action: #selector(SecondViewController.showPickerView))
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(editOrShare))
 		
 		tableView.sizeToFit()
 		
@@ -80,9 +80,38 @@ class SecondViewController: UITableViewController {
 	
 	
 	// ======================================================================================================
+	// =									TAB BAR CONTROLLER METHODS										=
+	// ======================================================================================================
+	
+	func editOrShare() {
+		let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the last time?", preferredStyle: .actionSheet)
+		let shareAction = UIAlertAction(title: "Share", style: .default, handler: { action in
+			print("Responding to handler - share")
+		
+			// Does sharing stuff here
+		})
+		
+		let editAction = UIAlertAction(title: "Edit", style: .default, handler: { action in
+			print("Responding to handler - edit")
+			
+			// Does editing stuff here
+		})
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		
+		alert.addAction(shareAction)
+		alert.addAction(editAction)
+		alert.addAction(cancelAction)
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	
+	
+	// ======================================================================================================
 	// =							   TABLEVIEW DELEGATE & DATASOURCE METHODS								=
 	// ======================================================================================================
 	
+	// cellForRowAt indexPath
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! StatsCell
 		myCell.nameLabel.text = "\(indexPath.row + 1)"
@@ -91,26 +120,22 @@ class SecondViewController: UITableViewController {
 		return myCell
 	}
 	
-	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		let myCell = tableView.dequeueReusableCell(withIdentifier: "footerId")! as UITableViewCell
-		myCell.contentView.backgroundColor = UIColor.groupTableViewBackground
-		myCell.textLabel?.text = titles[section]
-		return myCell
-		
-	}
-	
+	// didSelectRowAt indexPath
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
+	// estimatedHeightForHeaderInSection
+	override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return 50
+	}
+	
+	// numberOfSections
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return titles.count
 	}
 	
-	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return titles[section]
-	}
-	
+	// numberOfRowsInSection
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if titles[section].contains("Statistics") {
 			return 0
@@ -121,9 +146,21 @@ class SecondViewController: UITableViewController {
 		}
 	}
 	
-	override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		return 50
+	// titleForHeaderInSection
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return titles[section]
 	}
+	
+	// viweForHeaderInSection
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let myCell = tableView.dequeueReusableCell(withIdentifier: "footerId")! as UITableViewCell
+		myCell.contentView.backgroundColor = UIColor.groupTableViewBackground
+		myCell.textLabel?.text = titles[section]
+		return myCell
+		
+	}
+	
+	
 	
 	// ======================================================================================================
 	// =									  TABLEVIEW HELPER METHODS									    =
