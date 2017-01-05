@@ -17,5 +17,20 @@ class OLLViewController:UITableViewController {
 		for i in 1...58 {
 			images[i - 1] = "\(i)"
 		}
+		
+		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
+	}
+	
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
+		myCell.nameLabel.text = images[indexPath.row]
+		let image = UIImage(named: images[indexPath.row])
+		myCell.imageView?.image = image
+		return myCell
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return images.count
 	}
 }
