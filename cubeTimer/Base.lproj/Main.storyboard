@@ -50,7 +50,7 @@
                             <outletCollection property="gestureRecognizers" destination="Al8-rt-fQx" appends="YES" id="o4c-ab-Q3m"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="timer-icon" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="First" image="timer-icon" selectedImage="timer-icon-full" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="longPress" destination="viy-hG-A1T" id="OFq-Xj-7sG"/>
                         <outlet property="panPress" destination="Al8-rt-fQx" id="xDV-CM-Ue9"/>
@@ -90,7 +90,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAh-qA-doB" id="4o8-iF-Xat">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -300,5 +300,6 @@
     <resources>
         <image name="second" width="30" height="30"/>
         <image name="timer-icon" width="30" height="30"/>
+        <image name="timer-icon-full" width="30" height="30"/>
     </resources>
 </document>
