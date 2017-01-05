@@ -27,7 +27,14 @@ class OLLViewController:UITableViewController {
 		myCell.nameLabel.text = images[indexPath.row]
 		let image = UIImage(named: images[indexPath.row])
 		myCell.imageView?.image = image
+		
+		myCell.imageView?.frame.size.width = 60
+		myCell.imageView?.frame.size.height = 60
 		return myCell
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 70
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

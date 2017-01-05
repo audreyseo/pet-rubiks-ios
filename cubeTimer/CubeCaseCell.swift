@@ -35,7 +35,7 @@ class CubeCaseCell:UITableViewCell {
 		//		actionButton.addTarget(self, action: "handleAction", forControlEvents: .TouchUpInside)
 		
 		
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-96-[v0]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 //		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": statLabel]))
 	}
