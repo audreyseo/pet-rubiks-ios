@@ -89,6 +89,30 @@ class SecondViewController: UITableViewController {
 			print("Responding to handler - share")
 		
 			// Does sharing stuff here
+			// Writes CSV file
+			
+			// keep it simple here - make string
+			var csvContents = ""
+			let csvColumns = ["time"]
+			csvContents.append(csvColumns.joined(separator: ","))
+			csvContents.append("\n")
+			var stringData:[String] = Array(repeating: "", count: self.tbc.data.count)
+			for i in 0..<self.tbc.data.count {
+				stringData[i] = self.conversion.timeString(millis: self.tbc.data[i])
+			}
+			csvContents.append(stringData.joined(separator: "\n"))
+			
+			do {
+//				let error = NSError()
+				try csvContents.write(toFile: "session_data.csv", atomically: true, encoding: String.Encoding.unicode)
+			} catch {
+				print("There was an error woops")
+			}
+			
+			
+			
+			// Shares
+//			let activity = UIActivityViewController(activityItems: self.tbc.data, applicationActivities: nil)
 		})
 		
 		let editAction = UIAlertAction(title: "Edit", style: .default, handler: { action in
