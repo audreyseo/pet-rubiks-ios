@@ -102,15 +102,31 @@ class SecondViewController: UITableViewController {
 			}
 			csvContents.append(stringData.joined(separator: "\n"))
 			
+			let fileManager = FileManager()
+			let fileFolder = String(describing: fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask))
+			
 			do {
 //				let error = NSError()
-				let fileManager = FileManager()
-				if !fileManager.fileExists(atPath: "session_data.csv") {
-					fileManager.createFile(atPath: "session_data.csv", contents: csvContents.data(using: String.Encoding.unicode), attributes: nil)
+				
+				
+				
+				fileManager.changeCurrentDirectoryPath(String(describing: fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)))
+				
+				print("Changed directories")
+				if !fileManager.fileExists(atPath: "\(fileFolder)/session_data.csv") {
+					print("Creating file at path \(fileFolder)...")
+					fileManager.createFile(atPath: "\(fileFolder)/session_data.csv", contents: csvContents.data(using: String.Encoding.unicode), attributes: nil)
+					print("Created file.")
+					let files = try fileManager.contentsOfDirectory(atPath: "\(fileFolder)/")
+					for i in 0..<files.count {
+						print("#\(i): \(files[i])")
+					}
 				} else {
-					try csvContents.write(toFile: "session_data.csv", atomically: true, encoding: String.Encoding.unicode)
+					print("Writing to file...")
+					try csvContents.write(toFile: "\(fileFolder)/session_data.csv", atomically: true, encoding: String.Encoding.unicode)
 				}
 				print("It worked!")
+				
 			} catch {
 				print("There was an error woops")
 			}
@@ -118,7 +134,9 @@ class SecondViewController: UITableViewController {
 			
 			
 			// Shares
-			let url:URL = URL(fileURLWithPath: "session_data.csv")
+			let fileString = Bundle.main.path(forResource: "cubeTimer/session_data", ofType: "csv")
+			print("My file string: \(fileString)")
+			let url:URL = URL(fileURLWithPath: fileString!)
 			let activityObjects = [url]
 			let activity = UIActivityViewController(activityItems: activityObjects, applicationActivities: nil)
 			
