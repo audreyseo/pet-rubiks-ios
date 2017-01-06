@@ -54,7 +54,7 @@ class SliderCell:UITableViewCell {
 	func setLabel() {
 		let raw:Float = cellSlider.value
 		let rawStr:String = "\(raw)"
-		valueLabel.text = rawStr.substring(to: rawStr.index(rawStr.startIndex, offsetBy: 5, limitedBy: rawStr.endIndex))
+		valueLabel.text = rawStr.substring(to: rawStr.index(rawStr.startIndex, offsetBy: 5, limitedBy: rawStr.endIndex)!)
 	}
 	
 	func setupViews() {

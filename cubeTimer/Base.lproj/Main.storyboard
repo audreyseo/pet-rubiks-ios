@@ -199,7 +199,7 @@
         <!--Root View Controller-->
         <scene sceneID="WT4-W7-r99">
             <objects>
-                <tableViewController id="BLn-9f-qxk" sceneMemberID="viewController">
+                <tableViewController id="BLn-9f-qxk" customClass="SettingsViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qNy-Ln-lz4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
