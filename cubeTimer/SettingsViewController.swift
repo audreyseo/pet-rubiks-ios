@@ -32,6 +32,12 @@ class SettingsViewController: UITableViewController {
 		}
 	}
 	
+	func newSliderValue(value:Float) {
+		print("Changing value.")
+		longPress = value
+		userdef.set(value, forKey: longPressKey)
+	}
+	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let name = items[indexPath.row]
 		if sliderItems.contains(name) {
@@ -39,6 +45,7 @@ class SettingsViewController: UITableViewController {
 			cell.nameLabel.text = name
 			cell.valueLabel.text = "\(longPress)"
 			cell.setSlider(newValue: longPress)
+			cell.myTableViewController = self
 			return cell
 		}
 		
