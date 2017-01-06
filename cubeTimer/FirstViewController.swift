@@ -27,6 +27,11 @@ class FirstViewController: UIViewController {
 	var timeTouchingStart:UInt64 = 0
 	var colorTimer:Timer = Timer()
 	var minimumPressDur:Double = -1.0
+	var userdef = UserDefaults()
+	
+	
+	var longPressKey = "longPressDelayKey"
+	
 //	var link:CADisplayLink = CADisplayLink()
 
 	override func viewDidLoad() {
@@ -47,6 +52,18 @@ class FirstViewController: UIViewController {
 				print("Already have data")
 			}
 		}
+		
+		longPress.minimumPressDuration = Double(userdef.float(forKey: longPressKey))
+		if userdef.float(forKey: longPressKey) < 0.1 || userdef.float(forKey: longPressKey) > 5.0 {
+			longPress.minimumPressDuration = 0.5
+			userdef.set(0.5, forKey: longPressKey)
+		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		longPress.minimumPressDuration = Double(userdef.float(forKey: longPressKey))
 	}
 
 	override func didReceiveMemoryWarning() {
