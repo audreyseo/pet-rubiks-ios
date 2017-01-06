@@ -19,12 +19,6 @@ class PLLViewController:OLLViewController {
 //	var isEditingKnown = false
 	
 	override func viewDidLoad() {
-		knownCasesKey = "PLLknownCasesKey"
-		imagesKey = "PLLimagesKey"
-		super.viewDidLoad()
-		// do other stuff here
-		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
-		
 		caseInfo = [
 			"1": ["code":"Ub","solve1alg":"R2 U (R U R' U')(R' U')(R' U R')","solve1length":"11","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"EdgesOrCorners"],
 			"2": ["code":"Ua","solve1alg":"(R U')(R U)(R U)(R U') R' U' R2","solve1length":"11","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"EdgesOrCorners"],
@@ -50,6 +44,9 @@ class PLLViewController:OLLViewController {
 			"22": ["code":"Gb","solve1alg":"(R' U' R) y R2 u R' U R U' R u' R2","solve1length":"13","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"DoubleSpins"]
 		]
 		
+		knownCasesKey = "PLLknownCasesKey"
+		imagesKey = "PLLimagesKey"
+		
 		images = Array(repeating: "1", count: cases.count)
 		for i in 1...images.count {
 			images[i-1] = "\(i)"
@@ -57,10 +54,17 @@ class PLLViewController:OLLViewController {
 		for i in 0..<images.count {
 			cases[i] = (caseInfo[images[i]]?["code"]!)!
 		}
+		super.viewDidLoad()
+		// do other stuff here
+		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
+		
+		
+		
+		
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
-		getKnown()
 		saveKnown()
+		getKnown()
 	}
 	
 	override func getKnown() {
@@ -108,7 +112,7 @@ class PLLViewController:OLLViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
-		myCell.nameLabel.text = nameLabelText(indexPath: indexPath)
+		myCell.nameLabel.text = imageNameForLabel(ip: indexPath)
 		myCell.probLabel.text = probLabelText(indexPath: indexPath)
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
 		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
