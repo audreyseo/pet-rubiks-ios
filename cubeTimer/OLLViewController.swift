@@ -10,6 +10,8 @@ import UIKit
 
 class OLLViewController:UITableViewController {
 	var images:[String] = Array(repeating: "", count: 58)
+	var titles:[String] = ["Unknown", "Known"]
+	var knownCases:[String] = [String]()
 	
 	var caseInfo:[String: [String: String]] = [
 		"27": ["code": "OCLL1", "solve1alg": "(R U R' U) R U2 R'", "solve1length": "7", "solve2alg": "", "solve2length": "0", "prob": "\(1.0/54.0)"],
@@ -82,26 +84,32 @@ class OLLViewController:UITableViewController {
 	}
 	
 	func imageName(ip: IndexPath) -> String {
+		if titles[ip.section].contains("Known") {
+			return knownCases[ip.row]
+		}
 		return images[ip.row]
 	}
 	
 	func nameLabelText(indexPath: IndexPath) -> String {
-		let num:String = images[indexPath.row]
+		let num:String = imageName(ip: indexPath)
 		return caseInfo[num]!["code"]!
 	}
 	
 	func probLabelText(indexPath: IndexPath) -> String {
-		let str = (caseInfo[images[indexPath.row]]?["prob"]!)
+		let name = imageName(ip: indexPath)
+		let str = (caseInfo[name]?["prob"]!)
 		let index = str?.index((str?.startIndex)!, offsetBy: 5)
 		return (str?.substring(to: index!))!
 	}
 	
 	func firstAlgLabel(ip: IndexPath) -> String {
-		return (caseInfo[images[ip.row]]?["solve1alg"]!)!
+		let name = imageName(ip: ip)
+		return (caseInfo[name]?["solve1alg"]!)!
 	}
 	
 	func secondAlgLabel(ip: IndexPath) -> String {
-		return (caseInfo[images[ip.row]]?["solve2alg"]!)!
+		let name = imageName(ip: ip)
+		return (caseInfo[name]?["solve2alg"]!)!
 	}
 	
 	
@@ -124,6 +132,18 @@ class OLLViewController:UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return images.count
+		if titles[section].contains("Unknown") {
+			return images.count
+		} else {
+			return knownCases.count
+		}
+	}
+	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return titles.count
+	}
+	
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return titles[section]
 	}
 }

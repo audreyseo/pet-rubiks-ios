@@ -12,6 +12,9 @@ import UIKit
 class PLLViewController:OLLViewController {
 	var cases:[String] = ["Aa", "Ab", "E", "F", "Ga", "Gb", "Gc", "Gd", "H", "Ja", "Jb", "Na", "Nb", "Ra", "Rb", "T", "Ua", "Ub", "V", "Y", "Z", "Solved"]
 //	let casesToNums:[String:String] = [String:String]()
+	var knownImages:[String] = [String]()
+	var removedIndices:[Int] = [Int]()
+	var isEditingKnown = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -50,9 +53,27 @@ class PLLViewController:OLLViewController {
 		for i in 0..<images.count {
 			cases[i] = (caseInfo[images[i]]?["code"]!)!
 		}
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
+	}
+	
+	func toggleEditing() {
+		let title = navigationItem.rightBarButtonItem?.title
+		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
+		isEditingKnown = !isEditingKnown
 	}
 	
 	override func imageName(ip: IndexPath) -> String {
+		if ip.section == 1 && knownCases.count > 0 && knownCases.count > ip.row {
+			return knownImages[ip.row]
+		}
+		return images[ip.row]
+	}
+	
+	func imageNameForLabel(ip: IndexPath) -> String {
+		if ip.section == 1 && knownCases.count > 0 && knownCases.count > ip.row {
+			return knownCases[ip.row]
+		}
 		return cases[ip.row]
 	}
 	
@@ -64,7 +85,7 @@ class PLLViewController:OLLViewController {
 		myCell.probLabel.text = probLabelText(indexPath: indexPath)
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
 		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
-		let image = UIImage(named: imageName(ip: indexPath))
+		let image = UIImage(named: imageNameForLabel(ip: indexPath))
 		myCell.imageView?.image = image
 		
 		myCell.imageView?.frame.size.width = 50
@@ -72,12 +93,36 @@ class PLLViewController:OLLViewController {
 		return myCell
 	}
 	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if isEditingKnown {
+			if indexPath.section == 0 {
+				knownCases.append(cases[indexPath.row])
+				cases.remove(at: indexPath.row)
+				knownImages.append(images[indexPath.row])
+				images.remove(at: indexPath.row)
+				removedIndices += [indexPath.row]
+				tableView.reloadData()
+			} else {
+				cases.append(knownCases[indexPath.row])
+				knownCases.remove(at: indexPath.row)
+				images.append(knownImages[indexPath.row])
+				knownImages.remove(at: indexPath.row)
+				tableView.reloadData()
+			}
+		} else {
+			tableView.deselectRow(at: indexPath, animated: true)
+		}
+	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 55
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cases.count
+		if titles[section].contains("Unknown") {
+			return cases.count
+		} else {
+			return knownCases.count
+		}
 	}
 }
