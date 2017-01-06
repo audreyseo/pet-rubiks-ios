@@ -30,6 +30,7 @@ class SecondViewController: UITableViewController {
 //		tableView.register(Header.self, forHeaderFooterViewReuseIdentifier: "headerId")
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(editOrShare))
+		navigationItem.hidesBackButton = false
 		
 		tableView.sizeToFit()
 		
@@ -76,6 +77,13 @@ class SecondViewController: UITableViewController {
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		let backItem = UIBarButtonItem()
+		backItem.title = "Back"
+		navigationItem.backBarButtonItem = backItem
 	}
 	
 	
@@ -226,7 +234,10 @@ class SecondViewController: UITableViewController {
 	}
 	
 	
-	
+	func changeSessions() {
+		// Do a little switch-a-roo
+		print("Switching sessions.")
+	}
 	
 	
 	// ======================================================================================================

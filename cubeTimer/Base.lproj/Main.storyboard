@@ -80,7 +80,7 @@
         <!--Title-->
         <scene sceneID="jyQ-Vq-bDe">
             <objects>
-                <tableViewController id="LpM-Yo-3Iy" customClass="SecondViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="sessionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LpM-Yo-3Iy" customClass="SessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KPn-JJ-iy2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,10 +276,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="454"/>
         </scene>
-        <!--Session View Controller-->
+        <!--Second View Controller-->
         <scene sceneID="Tax-eV-ymK">
             <objects>
-                <tableViewController storyboardIdentifier="sessionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cKS-CM-3xe" customClass="SessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="timesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cKS-CM-3xe" customClass="SecondViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Pn-6A-ZrU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
