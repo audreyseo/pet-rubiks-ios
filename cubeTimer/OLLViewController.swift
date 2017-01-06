@@ -13,6 +13,10 @@ class OLLViewController:UITableViewController {
 	var titles:[String] = ["Unknown", "Known"]
 	var knownCases:[String] = [String]()
 	var isEditingKnown = false
+	var userdef = UserDefaults()
+	
+	let knownCasesKey = "knownCasesKey"
+	let imagesKey = "imagesKey"
 	
 	var caseInfo:[String: [String: String]] = [
 		"27": ["code": "OCLL1", "solve1alg": "(R U R' U) R U2 R'", "solve1length": "7", "solve2alg": "", "solve2length": "0", "prob": "\(1.0/54.0)"],
@@ -83,12 +87,32 @@ class OLLViewController:UITableViewController {
 		
 		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
+		getKnown()
+		saveKnown()
+	}
+	
+	func getKnown() {
+		if userdef.array(forKey: knownCasesKey) != nil {
+			knownCases = userdef.array(forKey: knownCasesKey) as! [String]
+		}
+		
+		if userdef.array(forKey: imagesKey) != nil {
+			images = userdef.array(forKey: imagesKey) as! [String]
+		}
+	}
+	
+	func saveKnown() {
+		userdef.set(knownCases, forKey: knownCasesKey)
+		userdef.set(images, forKey: imagesKey)
 	}
 	
 	func toggleEditing() {
 		let title = navigationItem.rightBarButtonItem?.title
 		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
 		isEditingKnown = !isEditingKnown
+		if !isEditingKnown {
+			saveKnown()
+		}
 	}
 
 	
