@@ -80,6 +80,10 @@ class OLLViewController:UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		registrationStuff()
+	}
+	
+	func registrationStuff() {
 		// do stuff here
 		for i in 1...58 {
 			images[i - 1] = "\(i)"

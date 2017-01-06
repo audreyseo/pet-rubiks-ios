@@ -19,6 +19,7 @@ class PLLViewController:OLLViewController {
 //	var isEditingKnown = false
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		caseInfo = [
 			"1": ["code":"Ub","solve1alg":"R2 U (R U R' U')(R' U')(R' U R')","solve1length":"11","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"EdgesOrCorners"],
 			"2": ["code":"Ua","solve1alg":"(R U')(R U)(R U)(R U') R' U' R2","solve1length":"11","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"EdgesOrCorners"],
@@ -53,8 +54,9 @@ class PLLViewController:OLLViewController {
 		}
 		for i in 0..<images.count {
 			cases[i] = (caseInfo[images[i]]?["code"]!)!
+			print("\(i): \(images[i])")
 		}
-		super.viewDidLoad()
+		//super.viewDidLoad()
 		// do other stuff here
 		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
 		
@@ -65,6 +67,10 @@ class PLLViewController:OLLViewController {
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
 		saveKnown()
 		getKnown()
+	}
+	
+	override func registrationStuff() {
+		// do nothing -> this is the point
 	}
 	
 	override func getKnown() {
@@ -155,5 +161,9 @@ class PLLViewController:OLLViewController {
 		} else {
 			return knownCases.count
 		}
+	}
+	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return 2
 	}
 }
