@@ -9,11 +9,12 @@
 import UIKit
 
 class SliderCell:UITableViewCell {
-	//	var myTableViewController: SecondViewController?
+	var myTableViewController: SettingsViewController?
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupViews()
+		cellSlider.addTarget(self, action: #selector(setLabel), for: .valueChanged)
 	}
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -39,11 +40,10 @@ class SliderCell:UITableViewCell {
 	let cellSlider: UISlider = {
 		let sl = UISlider()
 		sl.translatesAutoresizingMaskIntoConstraints = false
-		sl.isContinuous = true
+		sl.isContinuous = false
 		sl.minimumValue = 0.1
 		sl.maximumValue = 5.0
 		sl.setValue(0.5, animated: true)
-		sl.addTarget(self, action: #selector(setLabel), for: .allTouchEvents)
 		return sl
 	}()
 	
@@ -52,6 +52,7 @@ class SliderCell:UITableViewCell {
 	}
 	
 	func setLabel() {
+		//print("Setting label.")
 		let raw:Float = cellSlider.value
 		let rawStr:String = "\(raw)"
 		valueLabel.text = rawStr.substring(to: rawStr.index(rawStr.startIndex, offsetBy: 5, limitedBy: rawStr.endIndex)!)
