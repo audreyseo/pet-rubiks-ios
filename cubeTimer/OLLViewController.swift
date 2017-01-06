@@ -81,16 +81,37 @@ class OLLViewController:UITableViewController {
 		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
 	}
 	
+	func imageName(ip: IndexPath) -> String {
+		return images[ip.row]
+	}
+	
+	func nameLabelText(indexPath: IndexPath) -> String {
+		let num:String = images[indexPath.row]
+		return caseInfo[num]!["code"]!
+	}
+	
+	func probLabelText(indexPath: IndexPath) -> String {
+		let str = (caseInfo[images[indexPath.row]]?["prob"]!)
+		let index = str?.index((str?.startIndex)!, offsetBy: 5)
+		return (str?.substring(to: index!))!
+	}
+	
+	func firstAlgLabel(ip: IndexPath) -> String {
+		return (caseInfo[images[ip.row]]?["solve1alg"]!)!
+	}
+	
+	func secondAlgLabel(ip: IndexPath) -> String {
+		return (caseInfo[images[ip.row]]?["solve2alg"]!)!
+	}
+	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
-		myCell.nameLabel.text = images[indexPath.row]
-		let str = (caseInfo[images[indexPath.row]]?["prob"]!)
-		let index = str?.index((str?.startIndex)!, offsetBy: 5)
-		myCell.probLabel.text = str?.substring(to: index!)
-		myCell.algLabel.text = (caseInfo[images[indexPath.row]]?["solve1alg"]!)
-		myCell.algLabel1.text = (caseInfo[images[indexPath.row]]?["solve2alg"]!)
-		let image = UIImage(named: images[indexPath.row])
+		myCell.nameLabel.text = nameLabelText(indexPath: indexPath)
+		myCell.probLabel.text = probLabelText(indexPath: indexPath)
+		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
+		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
+		let image = UIImage(named: imageName(ip: indexPath))
 		myCell.imageView?.image = image
 		
 		myCell.imageView?.frame.size.width = 60

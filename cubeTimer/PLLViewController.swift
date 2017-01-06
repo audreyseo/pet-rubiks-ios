@@ -10,7 +10,8 @@ import UIKit
 
 
 class PLLViewController:OLLViewController {
-	let cases:[String] = ["Aa", "Ab", "E", "F", "Ga", "Gb", "Gc", "Gd", "H", "Ja", "Jb", "Na", "Nb", "Ra", "Rb", "T", "Ua", "Ub", "V", "Y", "Z", "Solved"]
+	var cases:[String] = ["Aa", "Ab", "E", "F", "Ga", "Gb", "Gc", "Gd", "H", "Ja", "Jb", "Na", "Nb", "Ra", "Rb", "T", "Ua", "Ub", "V", "Y", "Z", "Solved"]
+//	let casesToNums:[String:String] = [String:String]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,19 +42,36 @@ class PLLViewController:OLLViewController {
 			"21": ["code":"Gd","solve1alg":"(R U R') y' R2 u' R U' R' U R' u R2","solve1length":"13","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"DoubleSpins"],
 			"22": ["code":"Gb","solve1alg":"(R' U' R) y R2 u R' U R U' R u' R2","solve1length":"13","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"DoubleSpins"]
 		]
+		
+		images = Array(repeating: "1", count: cases.count)
+		for i in 1...images.count {
+			images[i-1] = "\(i)"
+		}
+		for i in 0..<images.count {
+			cases[i] = (caseInfo[images[i]]?["code"]!)!
+		}
 	}
+	
+	override func imageName(ip: IndexPath) -> String {
+		return cases[ip.row]
+	}
+	
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
-		myCell.nameLabel.text = cases[indexPath.row]
-		let image = UIImage(named: cases[indexPath.row])
+		myCell.nameLabel.text = nameLabelText(indexPath: indexPath)
+		myCell.probLabel.text = probLabelText(indexPath: indexPath)
+		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
+		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
+		let image = UIImage(named: imageName(ip: indexPath))
 		myCell.imageView?.image = image
 		
 		myCell.imageView?.frame.size.width = 60
 		myCell.imageView?.frame.size.height = 60
 		return myCell
 	}
+	
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 70
