@@ -71,7 +71,7 @@ class CubeCaseCell:UITableViewCell {
 				algStacker.addSubview(algLabel1)
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel1]))
-				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-[v1]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-[v1]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
 			} else {
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
@@ -89,7 +89,7 @@ class CubeCaseCell:UITableViewCell {
 		//		actionButton.addTarget(self, action: "handleAction", forControlEvents: .TouchUpInside)
 		
 		
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-100-[v0]-[v2]-[v1]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": probLabel, "v2"
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-85-[v0]-[v2]-[v1]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": probLabel, "v2"
 			: algStacker]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))

@@ -67,14 +67,14 @@ class PLLViewController:OLLViewController {
 		let image = UIImage(named: imageName(ip: indexPath))
 		myCell.imageView?.image = image
 		
-		myCell.imageView?.frame.size.width = 60
-		myCell.imageView?.frame.size.height = 60
+		myCell.imageView?.frame.size.width = 50
+		myCell.imageView?.frame.size.height = 50
 		return myCell
 	}
 	
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 70
+		return 55
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
