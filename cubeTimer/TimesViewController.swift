@@ -59,6 +59,9 @@ class TimesViewController: UITableViewController {
 				} else {
 					activeData = self.data
 				}
+			} else {
+				self.data = tbc.data
+				performInsertion()
 			}
 		}
 		
@@ -378,6 +381,15 @@ class TimesViewController: UITableViewController {
 					adjustHeightOfTableview()
 				}
 			}
+		} else {
+			let originalSize = oldSize
+			
+			var indexPaths:[IndexPath] = [IndexPath]()
+			for i in 0..<originalSize {
+				indexPaths.append(IndexPath(row: i, section: 1))
+			}
+			
+			tableView.deleteRows(at: indexPaths, with: .fade)
 		}
 	}
 	

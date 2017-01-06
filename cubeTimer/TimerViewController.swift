@@ -191,7 +191,12 @@ class TimerViewController: UIViewController {
 				let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the last time?", preferredStyle: .alert)
 				alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
 //					print("Dropping last")
-					self.tbc.data.popLast()
+					if self.tbc.data.startIndex != self.tbc.data.endIndex - 1 {
+						self.tbc.data.popLast()
+					} else {
+						self.tbc.data.remove(at: self.tbc.data.startIndex)
+					}
+					self.tbc.saveData()
 					return;
 				}))
 				alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
