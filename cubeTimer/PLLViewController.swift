@@ -14,7 +14,7 @@ class PLLViewController:OLLViewController {
 //	let casesToNums:[String:String] = [String:String]()
 	var knownImages:[String] = [String]()
 	var removedIndices:[Int] = [Int]()
-	var isEditingKnown = false
+//	var isEditingKnown = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -57,7 +57,7 @@ class PLLViewController:OLLViewController {
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
 	}
 	
-	func toggleEditing() {
+	override func toggleEditing() {
 		let title = navigationItem.rightBarButtonItem?.title
 		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
 		isEditingKnown = !isEditingKnown

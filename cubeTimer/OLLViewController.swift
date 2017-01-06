@@ -12,6 +12,7 @@ class OLLViewController:UITableViewController {
 	var images:[String] = Array(repeating: "", count: 58)
 	var titles:[String] = ["Unknown", "Known"]
 	var knownCases:[String] = [String]()
+	var isEditingKnown = false
 	
 	var caseInfo:[String: [String: String]] = [
 		"27": ["code": "OCLL1", "solve1alg": "(R U R' U) R U2 R'", "solve1length": "7", "solve2alg": "", "solve2length": "0", "prob": "\(1.0/54.0)"],
@@ -81,7 +82,15 @@ class OLLViewController:UITableViewController {
 		}
 		
 		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
 	}
+	
+	func toggleEditing() {
+		let title = navigationItem.rightBarButtonItem?.title
+		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
+		isEditingKnown = !isEditingKnown
+	}
+
 	
 	func imageName(ip: IndexPath) -> String {
 		if titles[ip.section].contains("Known") {
@@ -125,6 +134,22 @@ class OLLViewController:UITableViewController {
 		myCell.imageView?.frame.size.width = 50
 		myCell.imageView?.frame.size.height = 50
 		return myCell
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if isEditingKnown {
+			if indexPath.section == 0 {
+				knownCases.append(images[indexPath.row])
+				images.remove(at: indexPath.row)
+				tableView.reloadData()
+			} else {
+				images.append(knownCases[indexPath.row])
+				knownCases.remove(at: indexPath.row)
+				tableView.reloadData()
+			}
+		} else {
+			tableView.deselectRow(at: indexPath, animated: true)
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
