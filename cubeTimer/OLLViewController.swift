@@ -15,8 +15,8 @@ class OLLViewController:UITableViewController {
 	var isEditingKnown = false
 	var userdef = UserDefaults()
 	
-	let knownCasesKey = "knownCasesKey"
-	let imagesKey = "imagesKey"
+	var knownCasesKey = "knownCasesKey"
+	var imagesKey = "imagesKey"
 	
 	var caseInfo:[String: [String: String]] = [
 		"27": ["code": "OCLL1", "solve1alg": "(R U R' U) R U2 R'", "solve1length": "7", "solve2alg": "", "solve2length": "0", "prob": "\(1.0/54.0)"],

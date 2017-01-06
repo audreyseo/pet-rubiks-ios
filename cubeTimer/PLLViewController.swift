@@ -14,11 +14,13 @@ class PLLViewController:OLLViewController {
 //	let casesToNums:[String:String] = [String:String]()
 	var knownImages:[String] = [String]()
 	var removedIndices:[Int] = [Int]()
-	let casesKey = "casesKey"
-	let knownImagesKey = "knownImagesKey"
+	let casesKey = "PLLcasesKey"
+	let knownImagesKey = "PLLknownImagesKey"
 //	var isEditingKnown = false
 	
 	override func viewDidLoad() {
+		knownCasesKey = "PLLknownCasesKey"
+		imagesKey = "PLLimagesKey"
 		super.viewDidLoad()
 		// do other stuff here
 		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
@@ -62,29 +64,21 @@ class PLLViewController:OLLViewController {
 	}
 	
 	override func getKnown() {
-		print("Fatal?0")
 		super.getKnown()
-		print("Fatal?1")
 		if userdef.array(forKey: knownImagesKey) != nil {
 			knownImages = userdef.array(forKey: knownImagesKey) as! [String]
 		}
-		print("Fatal?2")
 		
 		if userdef.array(forKey: casesKey) != nil {
 			cases = userdef.array(forKey: casesKey) as! [String]
 		}
-		print("Fatal?3")
 	}
 	
 	override func saveKnown() {
-		print("Fatal?0")
 		super.saveKnown()
-		print("Fatal?1")
 		
 		userdef.set(knownImages, forKey: knownImagesKey)
-		print("Fatal?2")
 		userdef.set(cases, forKey: casesKey)
-		print("Fatal?3")
 	}
 	
 	override func toggleEditing() {
