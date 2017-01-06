@@ -89,6 +89,7 @@ class OLLViewController:UITableViewController {
 		let index = str?.index((str?.startIndex)!, offsetBy: 5)
 		myCell.probLabel.text = str?.substring(to: index!)
 		myCell.algLabel.text = (caseInfo[images[indexPath.row]]?["solve1alg"]!)
+		myCell.algLabel1.text = (caseInfo[images[indexPath.row]]?["solve2alg"]!)
 		let image = UIImage(named: images[indexPath.row])
 		myCell.imageView?.image = image
 		

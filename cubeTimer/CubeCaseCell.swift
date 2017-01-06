@@ -31,7 +31,16 @@ class CubeCaseCell:UITableViewCell {
 		let label = UILabel()
 		label.text = "Sample Item"
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = UIFont.systemFont(ofSize: 14)
+		label.font = UIFont.systemFont(ofSize: 12)
+		label.numberOfLines = 0
+		return label
+	}()
+	
+	let algLabel1: UILabel = {
+		let label = UILabel()
+		label.text = "Sample Item"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.font = UIFont.systemFont(ofSize: 12)
 		label.numberOfLines = 0
 		return label
 	}()
@@ -45,10 +54,35 @@ class CubeCaseCell:UITableViewCell {
 		return label
 	}()
 	
+	let algStacker:UIStackView = {
+		let stck = UIStackView()
+		stck.translatesAutoresizingMaskIntoConstraints = false
+		stck.alignment = .center
+		stck.axis = .horizontal
+		return stck
+	}()
+	
 	func setupViews() {
+		//algStacker.alignment = .center
+		//algStacker.axis = .horizontal
+		if algLabel.text != "" {
+			algStacker.addSubview(algLabel)
+			if algLabel1.text != "" {
+				algStacker.addSubview(algLabel1)
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel1]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-[v1]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
+			} else {
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
+			}
+		}
 		addSubview(nameLabel)
 		addSubview(probLabel)
-		addSubview(algLabel)
+		addSubview(algStacker)
+		//addSubview(algLabel)
+		
+		
 //		addSubview(statLabel)
 		//		addSubview(actionButton)
 		
@@ -56,9 +90,9 @@ class CubeCaseCell:UITableViewCell {
 		
 		
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-100-[v0]-[v2]-[v1]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": probLabel, "v2"
-			: algLabel]))
+			: algStacker]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algStacker]))
 	}
 }
