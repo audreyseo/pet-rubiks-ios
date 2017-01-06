@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  TimesViewController.swift
 //  cubeTimer
 //
 //  Created by Audrey Seo on 27/12/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UITableViewController {
+class TimesViewController: UITableViewController {
 	var hasTabControl:Bool = false
 	var tbc:InfoSharingTabController = InfoSharingTabController()
 	var data:[Int] = [Int]()

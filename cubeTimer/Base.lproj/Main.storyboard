@@ -13,7 +13,7 @@
         <!--Timer-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="TimerViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -276,10 +276,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="454"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Times View Controller-->
         <scene sceneID="Tax-eV-ymK">
             <objects>
-                <tableViewController storyboardIdentifier="timesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cKS-CM-3xe" customClass="SecondViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="timesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cKS-CM-3xe" customClass="TimesViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Pn-6A-ZrU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

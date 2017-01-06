@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  TimerViewController.swift
 //  cubeTimer
 //
 //  Created by Audrey Seo on 27/12/2016.
@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class FirstViewController: UIViewController {
+class TimerViewController: UIViewController {
 	@IBOutlet var longPress: UILongPressGestureRecognizer!
 	@IBOutlet weak var scrambleLabel: UILabel!
 	@IBOutlet var panPress: UIPanGestureRecognizer!
@@ -38,7 +38,7 @@ class FirstViewController: UIViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
-//		timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(FirstViewController.update), userInfo: nil, repeats: true)
+//		timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(TimerViewController.update), userInfo: nil, repeats: true)
 		self.view.backgroundColor = UIColor.black
 		scrambleLabel.textColor = UIColor.white
 		scrambleLabel.text = generateScramble()
