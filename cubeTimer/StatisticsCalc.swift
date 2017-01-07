@@ -23,7 +23,7 @@ class StatisticsCalc {
 		"last100": 0.0
 	]
 	let statNames:[String] = [
-		"median", "mean", "3of5", "last5", "stdDev", "var", "last10", "10of12", "last100"
+		"mean", "median", "var", "stdDev", "last5", "3of5", "last10", "10of12", "last100"
 	]
 	let displayNames:[String:String] = [
 		"median": "Median",
