@@ -23,13 +23,17 @@ class StatisticsCalc {
 		"last100": 0.0
 	]
 	let statNames:[String] = [
-		"mean", "median", "var", "stdDev", "last5", "3of5", "last10", "10of12", "last100"
+		"mean", "best", "worst", "median", "var", "stdDev", "last5", "3of5", "last10", "10of12", "last100"
 	]
 	let displayNames:[String:String] = [
 		"median": "Median",
 		"mean": "Mean",
-		"3of5": "3 of 5",
-		"last5": "Last 5",
+		"best": "Best",
+		"worst": "Worst",
+		"best3of5": "Best 3 of 5",
+		"best5": "Best Avg. of 5",
+		"3of5": "Avg. of 3 out of 5",
+		"last5": "Avg. of Last 5",
 		"stdDev": "Std. Dev.",
 		"var": "Var.",
 		"last10": "Last 10",
@@ -123,6 +127,8 @@ class StatisticsCalc {
 	func calculate() {
 		self.stats["median"] = self.data.count >= 3 ? self.median() : 0.0
 		self.stats["mean"] = self.data.count >= 2 ? self.average() : 0.0
+		self.stats["best"] = self.data.count >= 2 ? Double(self.best()) : 0.0
+		self.stats["worst"] = self.data.count >= 2 ? Double(self.worst()) : 0.0
 		self.stats["3of5"] = self.data.count >= 5 ? self.last3of5() : 0.0
 		self.stats["last5"] = self.data.count >= 5 ? self.last5() : 0.0
 		self.stats["stdDev"] = self.data.count >= 2 ? self.standardDeviation() : 0.0
@@ -134,6 +140,14 @@ class StatisticsCalc {
 	
 	func dataSorted() -> [Int] {
 		return self.data.sorted()
+	}
+	
+	func best() -> Int {
+		return self.data.min()!
+	}
+	
+	func worst() -> Int {
+		return self.data.max()!
 	}
 	
 	func median() -> Double {
@@ -193,7 +207,7 @@ class StatisticsCalc {
 		let slice:ArraySlice<Int> = data[start...end - 1]
 		let regMean = sliceMean(start: start, end: end)
 		let fraction:Double = Double(slice.min()! + slice.max()!) / Double(end - start)
-		return regMean - fraction
+		return (regMean - fraction) * (Double(end - start) / Double(end - start - 2))
 	}
 	
 	
