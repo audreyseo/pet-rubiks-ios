@@ -118,8 +118,11 @@ class StatisticsCalc {
 			let sortedData:[Int] = dataSorted()
 			let sortedCount = sortedData.count
 			let median = Int(Float(sortedCount) / 2.0)
+			print("Median: \(median), Count: \(sortedCount)")
+			print(sortedData[median])
+			print(sortedData[median + 1])
 			if count % 2 == 0 {
-				return (Double(sortedData[median] + sortedData[median])) / 2.0
+				return (Double(sortedData[median] + sortedData[median + 1])) / 2.0
 			} else {
 				return Double(sortedData[median])
 			}
@@ -144,7 +147,9 @@ class StatisticsCalc {
 	
 	func average(array:ArraySlice<Int>) -> Double {
 		var total:Int = 0
-		for i in 0...array.count - 1 {
+		print("Array Slice Count: \(array.count)")
+		for i in 0..<array.count {
+			print("i: \(i)")
 			total += array[i]
 		}
 		
@@ -154,17 +159,17 @@ class StatisticsCalc {
 	func sliceMean(start:Int, end:Int) -> Double {
 		var slice:ArraySlice<Int> = data[start...end - 1]
 		var total:Int = 0
-		for i in 0...slice.count - 1 {
+		for i in start..<end {
 			total += slice[i]
 		}
 		
-		return Double(total) / Double(data.count)
+		return Double(total) / Double(end - start)
 	}
 	
 	func sliceMeanExclude(start:Int, end:Int) -> Double {
 		let slice:ArraySlice<Int> = data[start...end - 1]
-		let regMean = average(array: slice)
-		let fraction:Double = Double(slice.min()! + slice.max()!) / Double(slice.count)
+		let regMean = sliceMean(start: start, end: end)
+		let fraction:Double = Double(slice.min()! + slice.max()!) / Double(end - start)
 		return regMean - fraction
 	}
 	
@@ -176,7 +181,9 @@ class StatisticsCalc {
 			for i in 0...data.count - 1 {
 				total += pow(Double(data[i]) - mean, 2)
 			}
-			return total / Double(data.count)
+			
+			// Need to divide by an extra 1000 because otherwise it will be milliseconds * milliseconds or microseconds
+			return total / Double(data.count * 1000)
 		}
 		
 		return -1.0
@@ -184,7 +191,9 @@ class StatisticsCalc {
 	
 	func standardDeviation() -> Double {
 		if data.count >= 2 {
-			return pow(variance(), 0.5)
+			// Need to multiply by 1000.0 to make it accurate again
+			// because we assume it's in microseconds anyway
+			return pow(variance() * 1000.0, 0.5)
 		}
 		return -1.0
 	}

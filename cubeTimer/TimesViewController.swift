@@ -67,6 +67,8 @@ class TimesViewController: UITableViewController {
 			}
 		}
 		
+		stats.updateData(newData: self.data)
+		
 		let footerView = UITableViewCell(style: .subtitle, reuseIdentifier: "footerId")
 //		footerView.nameLabel.text = ""
 		footerView.isOpaque = true
