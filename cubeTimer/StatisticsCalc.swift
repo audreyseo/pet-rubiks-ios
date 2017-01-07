@@ -270,7 +270,8 @@ class StatisticsCalc {
 	func last100() -> Double {
 		if data.count >= 100 {
 			let last = 100
-			return sliceMean(start: data.count - 1 - last, end: data.count)
+			print("Start: \(data.count - 1 - last)")
+			return sliceMean(start: max(data.count - 1 - last, 0)w, end: data.count)
 		}
 		return -1.0
 	}

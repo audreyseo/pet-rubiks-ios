@@ -65,9 +65,11 @@ class TimesViewController: UITableViewController {
 				self.data = tbc.data
 				performInsertion()
 			}
+			stats.updateData(newData: self.data)
+			tableView.reloadData()
 		}
 		
-		stats.updateData(newData: self.data)
+		
 		
 		let footerView = UITableViewCell(style: .subtitle, reuseIdentifier: "footerId")
 //		footerView.nameLabel.text = ""
