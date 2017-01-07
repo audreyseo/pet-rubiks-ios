@@ -36,10 +36,28 @@ class StatisticsCalc {
 		"10of12": "10 of 12",
 		"last100": "Last 100"
 	]
+	let statsRequiredCounts:[Int:[String]] = [
+		2: ["mean", "stdDev", "var", "best", "worst"],
+		3: ["median"],
+		5: ["3of5", "last5"],
+		6: ["best3of5", "best5"],
+		10: ["last10"],
+		11: ["best10"],
+		12: ["10of12"],
+		13: ["best10of12"],
+		100: ["last100"],
+		101: ["best100"]
+	]
+	var countsRequiredStats:[String: Int] = [String:Int]()
 	var count = 0
 	
 	init() {
 		// Initialize things...
+		for (key, item) in statsRequiredCounts {
+			for it in item {
+				countsRequiredStats[it] = key
+			}
+		}
 	}
 	
 	func updateData(newData:[Int]) {
@@ -67,32 +85,37 @@ class StatisticsCalc {
 	
 	func availableStats() -> [String] {
 		var avail:[String] = [String]()
-		if data.count >= 3 {
-			avail += ["median"]
+		for item in statNames {
+			if data.count >= countsRequiredStats[item]! {
+				avail += [item]
+			}
 		}
-		if data.count >= 2 {
-			avail += ["mean"]
-		}
-		
-		if data.count >= 5 {
-			avail += ["last5", "3of5"]
-		}
-		
-		if data.count >= 2 {
-			avail += ["stdDev", "var"]
-		}
-		
-		if data.count >= 10 {
-			avail += ["last10"]
-		}
-		
-		if data.count >= 12 {
-			avail += ["10of12"]
-		}
-		
-		if data.count >= 100 {
-			avail += ["last100"]
-		}
+//		if data.count >= 3 {
+//			avail += ["median"]
+//		}
+//		if data.count >= 2 {
+//			avail += ["mean"]
+//		}
+//		
+//		if data.count >= 5 {
+//			avail += ["last5", "3of5"]
+//		}
+//		
+//		if data.count >= 2 {
+//			avail += ["stdDev", "var"]
+//		}
+//		
+//		if data.count >= 10 {
+//			avail += ["last10"]
+//		}
+//		
+//		if data.count >= 12 {
+//			avail += ["10of12"]
+//		}
+//		
+//		if data.count >= 100 {
+//			avail += ["last100"]
+//		}
 		
 		return avail
 	}
