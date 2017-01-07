@@ -185,25 +185,42 @@ class TimerViewController: UIViewController {
 		return scramble.joined(separator: " ")
 	}
 	
+	func absoluteValue(val:Float) -> Float {
+		let sign:Float = val < 0 ? -1.0 : 1.0
+		return sign * val
+	}
+	
+	func translationLargeEnough(pan: UIPanGestureRecognizer) -> Bool {
+		let xTranslation = pan.translation(in: self.view).x
+		//let yTranslation = pan.translation(in: self.view).y
+		//print(xTranslation / self.view.frame.size.width)
+		return absoluteValue(val: (Float(xTranslation) / Float(self.view.frame.size.width))) > 0.25
+	}
+	
 	@IBAction func panGestured(_ sender: UIPanGestureRecognizer) {
 		if sender.state == .ended {
-			if sender.velocity(in: self.view).x < 0 {
-				let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the last time?", preferredStyle: .alert)
-				alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-//					print("Dropping last")
-					if self.tbc.data.startIndex != self.tbc.data.endIndex - 1 {
-						self.tbc.data.popLast()
-					} else {
-						self.tbc.data.remove(at: self.tbc.data.startIndex)
-					}
-					self.tbc.saveData()
-					return;
-				}))
-				alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-				self.present(alert, animated: true, completion: nil)
+			if !isTiming && translationLargeEnough(pan: sender) {
 				
-			} else if sender.velocity(in: self.view).x > 0 {
-				scrambleLabel.text = generateScramble()
+				if sender.velocity(in: self.view).x < 0 {
+					let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the last time?", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+						//					print("Dropping last")
+						if self.tbc.data.startIndex != self.tbc.data.endIndex - 1 {
+							self.tbc.data.popLast()
+						} else {
+							self.tbc.data.remove(at: self.tbc.data.startIndex)
+						}
+						self.tbc.saveData()
+						return;
+					}))
+					alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+					self.present(alert, animated: true, completion: nil)
+					
+				} else if sender.velocity(in: self.view).x > 0 {
+					scrambleLabel.text = generateScramble()
+				}
+			} else {
+				stopTimer(sender)
 			}
 		}
 	}
