@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SessionViewController:UITableViewController {
-	var tbc = InfoSharingTabController()
+class SessionViewController:TableVC {
+	//var tbc = InfoSharingTabController()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -21,7 +21,7 @@ class SessionViewController:UITableViewController {
 		next?.navigationItem.title = "Times"
 		self.navigationController?.pushViewController(next!, animated: false)
 		
-		self.tbc = self.tabBarController as! InfoSharingTabController
+		//self.tbc = self.tabBarController as! InfoSharingTabController
 	}
 	
 	func doneFunction() {
