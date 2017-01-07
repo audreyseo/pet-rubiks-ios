@@ -18,6 +18,8 @@ class TimesViewController: UITableViewController {
 	
 	var titles:[String] = ["Statistics", "Times", ""]
 	
+	var stats = StatisticsCalc()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.title = "Statistics and Times"
@@ -250,8 +252,13 @@ class TimesViewController: UITableViewController {
 	// cellForRowAt indexPath
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "cellId") as! StatsCell
-		myCell.nameLabel.text = "\(indexPath.row + 1)"
-		myCell.statLabel.text =  conversion.timeString(millis: activeData[indexPath.row]) //"\(activeData[indexPath.row])"
+		if indexPath.section == 0 {
+			myCell.nameLabel.text = stats.getDisplayName(index: indexPath.row)
+			myCell.statLabel.text = conversion.timeString(millis: Int(stats.getStat(index: indexPath.row)!))
+		} else {
+			myCell.nameLabel.text = "\(indexPath.row + 1)"
+			myCell.statLabel.text =  conversion.timeString(millis: activeData[indexPath.row]) //"\(activeData[indexPath.row])"
+		}
 		
 		return myCell
 	}
@@ -274,7 +281,7 @@ class TimesViewController: UITableViewController {
 	// numberOfRowsInSection
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if titles[section].contains("Statistics") {
-			return 0
+			return stats.getNumStats()
 		} else if titles[section].contains("Times") {
 			return activeData.count
 		} else {

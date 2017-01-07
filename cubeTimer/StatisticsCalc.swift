@@ -45,6 +45,56 @@ class StatisticsCalc {
 	func updateData(newData:[Int]) {
 		self.data = newData
 		self.count = self.data.count
+		
+		calculate()
+	}
+	
+	func getStat(index:Int) -> Double? {
+		return stats[availableStats()[index]]
+	}
+	
+	func getName(index:Int) -> String? {
+		return availableStats()[index]
+	}
+	
+	func getDisplayName(index:Int) -> String? {
+		return displayNames[availableStats()[index]]
+	}
+	
+	func getNumStats() -> Int {
+		return availableStats().count
+	}
+	
+	func availableStats() -> [String] {
+		var avail:[String] = [String]()
+		if data.count >= 3 {
+			avail += ["median"]
+		}
+		if data.count >= 2 {
+			avail += ["mean"]
+		}
+		
+		if data.count >= 5 {
+			avail += ["last5", "3of5"]
+		}
+		
+		if data.count >= 2 {
+			avail += ["stdDev", "var"]
+		}
+		
+		if data.count >= 10 {
+			avail += ["last10"]
+		}
+		
+		if data.count >= 12 {
+			avail += ["10of12"]
+		}
+		
+		if data.count >= 100 {
+			avail += ["last100"]
+		}
+		
+		return avail
 	}
 	
 	func calculate() {
@@ -57,12 +107,15 @@ class StatisticsCalc {
 		self.stats["last10"] = self.data.count >= 10 ? self.last10() : 0.0
 		self.stats["10of12"] = self.data.count >= 12 ? self.last10of12() : 0.0
 		self.stats["last100"] = self.data.count >= 100 ? self.last100() : 0.0
-		
+	}
+	
+	func dataSorted() -> [Int] {
+		return self.data.sorted()
 	}
 	
 	func median() -> Double {
 		if self.data.count >= 3 {
-			let sortedData:[Int] = self.data.sorted()
+			let sortedData:[Int] = dataSorted()
 			let sortedCount = sortedData.count
 			let median = Int(Float(sortedCount) / 2.0)
 			if count % 2 == 0 {
