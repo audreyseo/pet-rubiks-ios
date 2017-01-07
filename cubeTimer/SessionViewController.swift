@@ -38,6 +38,10 @@ class SessionViewController:TableVC {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return tbc.keys.count
+		if super.tableView(tableView, numberOfRowsInSection: section) == 0 {
+			return 0
+		} else {
+			return tbc.keys.count
+		}
 	}
 }

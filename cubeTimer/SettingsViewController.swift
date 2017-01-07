@@ -9,9 +9,8 @@
 import UIKit
 
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: TableVC {
 	
-	var items = ["Long Press Delay"]
 	var sliderItems = ["Long Press Delay"]
 	var longPressKey = "longPressDelayKey"
 	var userdef = UserDefaults()
@@ -20,6 +19,7 @@ class SettingsViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		items = ["Long Press Delay"]
 		
 		// more stuff here
 		
@@ -53,11 +53,15 @@ class SettingsViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return items.count
+		if super.tableView(tableView, numberOfRowsInSection: section) == 0 {
+			return 0
+		} else {
+			return items.count
+		}
 	}
 	
-	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
+	//override func numberOfSections(in tableView: UITableView) -> Int {
+	//	return 1
+	//}
 	
 }

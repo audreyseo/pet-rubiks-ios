@@ -65,8 +65,8 @@ class PLLViewController:OLLViewController {
 		
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
-		saveKnown()
 		getKnown()
+		saveKnown()
 	}
 	
 	override func registrationStuff() {

@@ -12,7 +12,7 @@ import UIKit
 class TableVC:UITableViewController {
 	var titles:[String] = Array(repeating: "", count: 2)
 	var tbc = InfoSharingTabController()
-	
+	var items = [""]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -48,6 +48,18 @@ class TableVC:UITableViewController {
 		myCell.contentView.backgroundColor = UIColor.groupTableViewBackground
 		myCell.textLabel?.text = titles[section]
 		return myCell
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if section < titles.count - 1 {
+			return items.count
+		} else {
+			return 0
+		}
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 40
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
