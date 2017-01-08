@@ -116,7 +116,7 @@ class InfoSharingTabController:UITabBarController {
 			sessions.removeValue(forKey: removed)
 			if currentSession == ip.row && keys.count > 0 {
 				currentSession = 0
-			} else if keys.count > 0 {
+			} else if keys.count > 0 && currentSession > ip.row {
 				currentSession -= 1
 			}
 			saveCurrentState()
