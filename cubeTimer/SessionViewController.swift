@@ -26,6 +26,12 @@ class SessionViewController:TableVC {
 		//self.tbc = self.tabBarController as! InfoSharingTabController
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		self.tbc.saveData()
+		self.tableView.reloadData()
+	}
+	
 	func doneFunction() {
 		let next = self.storyboard?.instantiateViewController(withIdentifier: "timesVC")
 		next?.navigationItem.title = "Times"
@@ -34,6 +40,9 @@ class SessionViewController:TableVC {
 	
 	func addNew() {
 		print("Going to add a new session")
+		let next = self.storyboard?.instantiateViewController(withIdentifier: "addSessionVC")
+		next?.navigationItem.title = "New Session"
+		self.navigationController?.pushViewController(next!, animated: true)
 	}
 	
 	

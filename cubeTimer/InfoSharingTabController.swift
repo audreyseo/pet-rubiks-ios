@@ -33,22 +33,33 @@ class InfoSharingTabController:UITabBarController {
 	
 	
 	func saveData() {
-		if currentSession != storage.integer(forKey: currentSessionKey) {
-			currentSession = storage.integer(forKey: currentSessionKey)
-		} else {
-			saveCurrentSession()
-		}
-		
 		if storage.array(forKey: timeKeysKey) != nil {
 			keys = storage.array(forKey: timeKeysKey) as! [String]
 		}
 		
+		storage.set(keys, forKey: timeKeysKey)
+		
+		if currentSession != storage.integer(forKey: currentSessionKey) && storage.integer(forKey: currentSessionKey) < keys.count {
+			currentSession = storage.integer(forKey: currentSessionKey)
+		}
+		saveCurrentSession()
+		
+		
 		if storage.dictionary(forKey: sessionsKey) != nil {
 			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]
 		}
-		sessions[keys[currentSession]] = data
 		
 		storage.set(sessions, forKey: sessionsKey)
+		
+		print("Current Session: \(currentSession)")
+		for i in 0..<keys.count {
+			print("\(i): \(keys[i])")
+		}
+		
+		for (key, val) in sessions {
+			print("\(key): \(val)")
+		}
+		sessions[keys[currentSession]] = data
 	}
 	
 	func saveCurrentSession() {
@@ -57,14 +68,18 @@ class InfoSharingTabController:UITabBarController {
 	}
 	
 	func newSession(key:String) {
+		print("\nNew Key: \(key)")
 		sessions[keys[currentSession]] = data
 		data = [Int]()
 		keys += [key]
-		currentSession = keys.endIndex
+		
+		currentSession = keys.endIndex - 1
 		if currentSession < keys.count && currentSession >= 0 {
 			print("currentSession is within range")
+			sessions[keys[currentSession]] = data
 		}
-		
+		storage.set(keys, forKey: timeKeysKey)
+		storage.set(sessions, forKey: sessionsKey)
 		saveCurrentSession()
 	}
 	
