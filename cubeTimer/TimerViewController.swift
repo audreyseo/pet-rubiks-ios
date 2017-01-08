@@ -108,7 +108,8 @@ class TimerViewController: UIViewController {
 	@IBAction func stopTimer(_ sender: Any) {
 		timer.invalidate()
 		if hasTabControl && isTiming {
-			self.tbc.data += [millis]
+			self.tbc.addData(newData: millis)
+//			self.tbc.data += [millis]
 			tbc.saveData()
 			isTiming = false
 			scrambleLabel.text = generateScramble()
@@ -129,28 +130,28 @@ class TimerViewController: UIViewController {
 	
 	
 	func update() {
+		t2 = mach_absolute_time()
+		var timeBaseInfo = mach_timebase_info_data_t()
+		mach_timebase_info(&timeBaseInfo)
+		let elapsedNano = (t2 - t1) * UInt64(timeBaseInfo.numer) / UInt64(timeBaseInfo.denom);
+		
+		millis = Int(Float(elapsedNano) * 0.000001)
+		timeLabel.text = converter.timeString(millis: millis)
+		
 //		millis += 1
 		
 //		let seconds = Int(Float(millis) / 1000.0)
 //		let millisR = millis % 1000
 ////		let seconds0 = (seconds < 10) ? "0" : ""
 //		let millis0 = (millisR < 100) ? ((millisR < 10) ? "00" : "0") : ""
-//		
+//
 //		timeLabel.text = "\(seconds).\(millis0)\(millisR)"
-		t2 = mach_absolute_time()
 //		let elapsed = t2 - t1
-		var timeBaseInfo = mach_timebase_info_data_t()
-		mach_timebase_info(&timeBaseInfo)
-		let elapsedNano = (t2 - t1) * UInt64(timeBaseInfo.numer) / UInt64(timeBaseInfo.denom);
-		
-		millis = Int(Float(elapsedNano) * 0.000001)
-		
 //		let seconds = Int(Float(millis) / 1000.0)
 //		let millisR = millis % 1000
 //		let seconds0 = (seconds < 10) ? "0" : ""
 //		let millis0 = (millisR < 100) ? ((millisR < 10) ? "00" : "0") : ""
 //		print("Millis: ", millisR)
-		timeLabel.text = converter.timeString(millis: millis)
 //		timeLabel.text = "\(seconds).\(millis0)\(millisR)"
 //		t1 = t2
 		
