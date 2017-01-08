@@ -17,6 +17,7 @@ class SessionViewController:TableVC, UITextFieldDelegate {
 		tableView.register(SessionCell.self, forCellReuseIdentifier: "sessionId")
 		tableView.register(FormCell.self, forCellReuseIdentifier: "formId")
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneFunction))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add New...", style: .plain, target: self, action: #selector(addNew))
 		
 		let next = self.storyboard?.instantiateViewController(withIdentifier: "timesVC")
 		next?.navigationItem.title = "Times"
@@ -29,6 +30,10 @@ class SessionViewController:TableVC, UITextFieldDelegate {
 		let next = self.storyboard?.instantiateViewController(withIdentifier: "timesVC")
 		next?.navigationItem.title = "Times"
 		self.navigationController?.pushViewController(next!, animated: true)
+	}
+	
+	func addNew() {
+		print("Going to add a new session")
 	}
 	
 	
