@@ -45,6 +45,16 @@ class SessionViewController:TableVC {
 		self.navigationController?.pushViewController(next!, animated: true)
 	}
 	
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			tbc.removeSession(ip: indexPath)
+			tableView.reloadData()
+		}
+	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
@@ -75,6 +85,7 @@ class SessionViewController:TableVC {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		if indexPath.row != tbc.currentSession {
+			print("Index: \(indexPath.row), Current Session: \(tbc.currentSession)")
 			let oldCell = tableView.cellForRow(at: IndexPath(row: tbc.currentSession, section: indexPath.section)) as! SessionCell
 			oldCell.defaultImage()
 			let newCell = tableView.cellForRow(at: indexPath) as! SessionCell
