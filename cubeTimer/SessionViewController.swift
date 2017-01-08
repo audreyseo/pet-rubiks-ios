@@ -47,13 +47,13 @@ class SessionViewController:TableVC {
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		if indexPath.row == 0 {
-			let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
-			myCell.nameLabel.text = tbc.keys[indexPath.row]
+		let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
+		myCell.nameLabel.text = tbc.keys[indexPath.row]
 		if indexPath.row == tbc.currentSession {
-			myCell.checkImage.image = UIImage(named: "checkmark")
+			myCell.checkOff()
 		}
 			return myCell
+		//		if indexPath.row == 0 {
 //		} else {
 //			let myCell = tableView.dequeueReusableCell(withIdentifier: "formId") as! FormCell
 //			myCell.nameLabel.text = "Session Name"
