@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SessionViewController:TableVC, UITextFieldDelegate {
+class SessionViewController:TableVC {
 	//var tbc = InfoSharingTabController()
 	
 	override func viewDidLoad() {
@@ -38,39 +38,33 @@ class SessionViewController:TableVC, UITextFieldDelegate {
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if indexPath.row == 0 {
+//		if indexPath.row == 0 {
 			let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
 			myCell.nameLabel.text = tbc.keys[indexPath.row]
 			return myCell
-		} else {
-			let myCell = tableView.dequeueReusableCell(withIdentifier: "formId") as! FormCell
-			myCell.nameLabel.text = "Session Name"
-			myCell.blank.delegate = self
-			return myCell
-		}
+//		} else {
+//			let myCell = tableView.dequeueReusableCell(withIdentifier: "formId") as! FormCell
+//			myCell.nameLabel.text = "Session Name"
+//			myCell.blank.delegate = self
+//			return myCell
+//		}
 	}
 	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		textField.resignFirstResponder()
-		textField.endEditing(true)
-		return false
-	}
-	
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		print("Value: \(textField.text)")
-	}
+//	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//		textField.resignFirstResponder()
+//		textField.endEditing(true)
+//		return false
+//	}
+//	
+//	func textFieldDidEndEditing(_ textField: UITextField) {
+//		print("Value: \(textField.text)")
+//	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if super.tableView(tableView, numberOfRowsInSection: section) == 0 {
 			return 0
 		} else {
-			return tbc.keys.count + 1
+			return tbc.keys.count
 		}
-	}
-	
-	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		view.endEditing(true)
-		super.touchesBegan(touches, with: event)
 	}
 }

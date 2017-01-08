@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="-887"/>
         </scene>
-        <!--Title-->
+        <!--SessionVC-->
         <scene sceneID="jyQ-Vq-bDe">
             <objects>
-                <tableViewController storyboardIdentifier="sessionVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LpM-Yo-3Iy" customClass="SessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="sessionVC" title="Sessions" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LpM-Yo-3Iy" userLabel="SessionVC" customClass="SessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KPn-JJ-iy2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,7 +90,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAh-qA-doB" id="4o8-iF-Xat">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -100,10 +100,11 @@
                             <outlet property="delegate" destination="LpM-Yo-3Iy" id="6c6-kk-It9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="vXB-yK-Jzh"/>
+                    <navigationItem key="navigationItem" title="Sessions" id="vXB-yK-Jzh"/>
                     <connections>
                         <segue destination="cKS-CM-3xe" kind="show" identifier="sessionSegue" id="7Y9-m4-mQ5"/>
                         <segue destination="fNW-GS-hjh" kind="show" identifier="editorSegue" id="Osr-gz-KOQ"/>
+                        <segue destination="J77-gB-usd" kind="presentation" identifier="addSessionSegue" id="tNu-Nb-8jZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6At-Im-KJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,7 +124,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDM-EV-bdc" id="SiE-PZ-w4j">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -151,7 +152,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0jQ-nC-g90" id="Nvl-cN-jNg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -180,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9nR-J9-Hfh" id="Tpe-J2-j5T">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -209,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNh-tr-MEh" id="GVl-Ud-blV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -276,6 +277,34 @@
             </objects>
             <point key="canvasLocation" x="750" y="454"/>
         </scene>
+        <!--New Session-->
+        <scene sceneID="cip-Ad-Y4L">
+            <objects>
+                <tableViewController storyboardIdentifier="addSessionVC" title="New Session" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J77-gB-usd" customClass="AddSessionViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uwc-mr-Vxx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5aW-43-RXp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5aW-43-RXp" id="DLe-6w-hGP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="J77-gB-usd" id="oXs-RO-WtE"/>
+                            <outlet property="delegate" destination="J77-gB-usd" id="vca-IW-vGW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3x4-aV-EdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2622" y="-1380"/>
+        </scene>
         <!--Times View Controller-->
         <scene sceneID="Tax-eV-ymK">
             <objects>
@@ -289,7 +318,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ho9-Jq-QLu" id="cpY-Zt-MbB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
