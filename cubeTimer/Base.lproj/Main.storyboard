@@ -290,7 +290,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5aW-43-RXp" id="DLe-6w-hGP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -337,7 +337,7 @@
         <scene sceneID="cfj-30-VeL">
             <objects>
                 <navigationController id="0VW-v8-biH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Stats" image="second" selectedImage="second" id="zbS-Mv-pll"/>
+                    <tabBarItem key="tabBarItem" title="Stats" image="stats-icon" selectedImage="stats-icon-full" id="zbS-Mv-pll"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rAy-rb-jEb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -374,7 +374,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="second" width="30" height="30"/>
+        <image name="stats-icon" width="30" height="30"/>
+        <image name="stats-icon-full" width="30" height="30"/>
         <image name="timer-icon" width="30" height="30"/>
         <image name="timer-icon-full" width="30" height="30"/>
     </resources>
