@@ -271,7 +271,7 @@ class StatisticsCalc {
 		if data.count >= 100 {
 			let last = 100
 			print("Start: \(data.count - 1 - last)")
-			return sliceMean(start: max(data.count - 1 - last, 0)w, end: data.count)
+			return sliceMean(start: max(data.count - 1 - last, 0), end: data.count)
 		}
 		return -1.0
 	}
