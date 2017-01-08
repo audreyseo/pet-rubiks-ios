@@ -50,6 +50,9 @@ class SessionViewController:TableVC {
 //		if indexPath.row == 0 {
 			let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
 			myCell.nameLabel.text = tbc.keys[indexPath.row]
+		if indexPath.row == tbc.currentSession {
+			myCell.checkImage.image = UIImage(named: "checkmark")
+		}
 			return myCell
 //		} else {
 //			let myCell = tableView.dequeueReusableCell(withIdentifier: "formId") as! FormCell
@@ -68,6 +71,27 @@ class SessionViewController:TableVC {
 //	func textFieldDidEndEditing(_ textField: UITextField) {
 //		print("Value: \(textField.text)")
 //	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		if indexPath.row != tbc.currentSession {
+			let oldCell = tableView.cellForRow(at: IndexPath(row: tbc.currentSession, section: indexPath.section)) as! SessionCell
+			oldCell.defaultImage()
+			let newCell = tableView.cellForRow(at: indexPath) as! SessionCell
+			newCell.checkOff()
+			tableView.deselectRow(at: indexPath, animated: true)
+			tbc.changeCurrentSession(ip: indexPath)
+//			tbc.currentSession = indexPath.row
+			//			let oldCell = tableView.dequeueReusableCell(withIdentifier: "sessionId", for: IndexPath(row: tbc.currentSession, section: indexPath.section)) as! SessionCell
+			//			oldCell.checkImage.image = UIImage()
+			//			oldCell.checkImage.tintColor = UIColor.blue
+//			let newCell = tableView.dequeueReusableCell(withIdentifier: "sessionId", for: indexPath) as! SessionCell
+//			newCell.checkImage.image = UIImage(named: "checkmark")
+//			newCell.checkImage.tintColor = UIColor.blue
+		} else {
+			super.tableView(tableView, didSelectRowAt: indexPath)
+		}
+	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if super.tableView(tableView, numberOfRowsInSection: section) == 0 {

@@ -51,14 +51,14 @@ class InfoSharingTabController:UITabBarController {
 		
 		storage.set(sessions, forKey: sessionsKey)
 		
-		print("Current Session: \(currentSession)")
-		for i in 0..<keys.count {
-			print("\(i): \(keys[i])")
-		}
-		
-		for (key, val) in sessions {
-			print("\(key): \(val)")
-		}
+//		print("Current Session: \(currentSession)")
+//		for i in 0..<keys.count {
+//			print("\(i): \(keys[i])")
+//		}
+//		
+//		for (key, val) in sessions {
+//			print("\(key): \(val)")
+//		}
 		sessions[keys[currentSession]] = data
 	}
 	
@@ -81,6 +81,19 @@ class InfoSharingTabController:UITabBarController {
 		storage.set(keys, forKey: timeKeysKey)
 		storage.set(sessions, forKey: sessionsKey)
 		saveCurrentSession()
+	}
+	
+	func isCurrentSession(title:String) -> Bool {
+		return keys[currentSession].contains(title)
+	}
+	
+	func changeCurrentSession(ip: IndexPath)  {
+		if ip.row < keys.count {
+			sessions[keys[currentSession]] = data
+			currentSession = ip.row
+			data = sessions[keys[currentSession]]!
+			saveCurrentSession()
+		}
 	}
 	
 }
