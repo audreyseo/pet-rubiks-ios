@@ -247,7 +247,7 @@
         <scene sceneID="eFR-4N-j8w">
             <objects>
                 <navigationController id="Cby-F4-sP8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="PLL" id="OLh-L4-Kag"/>
+                    <tabBarItem key="tabBarItem" title="PLL" image="pll-icon" id="OLh-L4-Kag"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9lh-wX-LoQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -264,7 +264,7 @@
         <scene sceneID="gNz-Wy-odo">
             <objects>
                 <navigationController id="ZRu-RT-RGi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="OLL" id="jcz-qa-eZY"/>
+                    <tabBarItem key="tabBarItem" title="OLL" image="oll-icon" id="jcz-qa-eZY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Kd-tY-lEG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -374,6 +374,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="oll-icon" width="30" height="30"/>
+        <image name="pll-icon" width="30" height="30"/>
         <image name="stats-icon" width="30" height="30"/>
         <image name="stats-icon-full" width="30" height="30"/>
         <image name="timer-icon" width="30" height="30"/>
