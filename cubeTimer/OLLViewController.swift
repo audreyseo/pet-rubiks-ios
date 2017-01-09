@@ -155,17 +155,40 @@ class OLLViewController:UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		print("Negative?: \(sourceIndexPath.section), \(sourceIndexPath.row), \(destinationIndexPath.section), \(destinationIndexPath.row)")
 		if isEditingKnown {
-			if sourceIndexPath.section == 1 {
-				let moved = knownCases[sourceIndexPath.row]
-				knownCases.remove(at: sourceIndexPath.row)
-				knownCases.insert(moved, at: destinationIndexPath.row)
+			moveRows(source: sourceIndexPath, dest: destinationIndexPath)
+		}
+	}
+	
+	func moveRows(source:IndexPath, dest:IndexPath) {
+		if source.section >= 0 && source.row >= 0 && dest.section >= 0 && dest.row >= 0 {
+			if source.section == 1 {
+				if dest.section == 1 {
+					removeReinsert(array: &knownCases, source: source, dest: dest)
+				} else {
+					removeReinsert(array: &knownCases, source: source, dest: dest, destArray: &images)
+				}
 			} else {
-				let moved = images[sourceIndexPath.row]
-				images.remove(at: sourceIndexPath.row)
-				images.insert(moved, at: destinationIndexPath.row)
+				if dest.section == 0 {
+					removeReinsert(array: &images, source: source, dest: dest)
+				} else {
+					removeReinsert(array: &images, source: source, dest: dest, destArray: &knownCases)
+				}
 			}
 		}
+	}
+	
+	func removeReinsert( array:inout [String], source:IndexPath, dest:IndexPath) {
+		let moved = array[source.row]
+		array.remove(at: source.row)
+		array.insert(moved, at: dest.row)
+	}
+	
+	func removeReinsert( array:inout [String], source:IndexPath, dest:IndexPath, destArray:inout [String]) {
+		let moved = array[source.row]
+		array.remove(at: source.row)
+		destArray.insert(moved, at: dest.row)
 	}
 	
 	

@@ -86,20 +86,43 @@ class PLLViewController:OLLViewController {
 	
 	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		if isEditingKnown {
-			if sourceIndexPath.section == 1 {
-				let moved = knownCases[sourceIndexPath.row]
-				let movedImage = knownImages[sourceIndexPath.row]
-				knownCases.remove(at: sourceIndexPath.row)
-				knownImages.remove(at: sourceIndexPath.row)
-				knownCases.insert(moved, at: destinationIndexPath.row)
-				knownImages.insert(movedImage, at: destinationIndexPath.row)
+			moveRows(source: sourceIndexPath, dest: destinationIndexPath)
+//			if sourceIndexPath.section == 1 {
+//				let moved = knownCases[sourceIndexPath.row]
+//				let movedImage = knownImages[sourceIndexPath.row]
+//				knownCases.remove(at: sourceIndexPath.row)
+//				knownImages.remove(at: sourceIndexPath.row)
+//				knownCases.insert(moved, at: destinationIndexPath.row)
+//				knownImages.insert(movedImage, at: destinationIndexPath.row)
+//			} else {
+//				let moved = images[sourceIndexPath.row]
+//				let movedCase = cases[sourceIndexPath.row]
+//				images.remove(at: sourceIndexPath.row)
+//				cases.remove(at: sourceIndexPath.row)
+//				images.insert(moved, at: destinationIndexPath.row)
+//				cases.insert(movedCase, at: destinationIndexPath.row)
+//			}
+		}
+	}
+	
+	override func moveRows(source: IndexPath, dest: IndexPath) {
+		if source.section >= 0 && source.row >= 0 && dest.section >= 0 && dest.row >= 0 {
+			if source.section == 1 {
+				if dest.section == 1 {
+					removeReinsert(array: &knownCases, source: source, dest: dest)
+					removeReinsert(array: &knownImages, source: source, dest: dest)
+				} else {
+					removeReinsert(array: &knownCases, source: source, dest: dest, destArray: &cases)
+					removeReinsert(array: &knownImages, source: source, dest: dest, destArray: &images)
+				}
 			} else {
-				let moved = images[sourceIndexPath.row]
-				let movedCase = cases[sourceIndexPath.row]
-				images.remove(at: sourceIndexPath.row)
-				cases.remove(at: sourceIndexPath.row)
-				images.insert(moved, at: destinationIndexPath.row)
-				cases.insert(movedCase, at: destinationIndexPath.row)
+				if dest.section == 0 {
+					removeReinsert(array: &cases, source: source, dest: dest)
+					removeReinsert(array: &images, source: source, dest: dest)
+				} else {
+					removeReinsert(array: &cases, source: source, dest: dest, destArray: &knownCases)
+					removeReinsert(array: &images, source: source, dest: dest, destArray: &knownImages)
+				}
 			}
 		}
 	}
