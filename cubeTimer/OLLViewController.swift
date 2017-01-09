@@ -114,6 +114,7 @@ class OLLViewController:UITableViewController {
 		let title = navigationItem.rightBarButtonItem?.title
 		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
 		isEditingKnown = !isEditingKnown
+		tableView.setEditing(isEditingKnown, animated: true)
 		if !isEditingKnown {
 			saveKnown()
 		}
@@ -147,6 +148,24 @@ class OLLViewController:UITableViewController {
 	func secondAlgLabel(ip: IndexPath) -> String {
 		let name = imageName(ip: ip)
 		return (caseInfo[name]?["solve2alg"]!)!
+	}
+	
+	override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+		return isEditingKnown
+	}
+	
+	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		if isEditingKnown {
+			if sourceIndexPath.section == 1 {
+				let moved = knownCases[sourceIndexPath.row]
+				knownCases.remove(at: sourceIndexPath.row)
+				knownCases.insert(moved, at: destinationIndexPath.row)
+			} else {
+				let moved = images[sourceIndexPath.row]
+				images.remove(at: sourceIndexPath.row)
+				images.insert(moved, at: destinationIndexPath.row)
+			}
+		}
 	}
 	
 	
