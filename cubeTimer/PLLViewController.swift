@@ -84,6 +84,27 @@ class PLLViewController:OLLViewController {
 		}
 	}
 	
+	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		if isEditingKnown {
+			if sourceIndexPath.section == 1 {
+				let moved = knownCases[sourceIndexPath.row]
+				let movedImage = knownImages[sourceIndexPath.row]
+				knownCases.remove(at: sourceIndexPath.row)
+				knownImages.remove(at: sourceIndexPath.row)
+				knownCases.insert(moved, at: destinationIndexPath.row)
+				knownImages.insert(movedImage, at: destinationIndexPath.row)
+			} else {
+				let moved = images[sourceIndexPath.row]
+				let movedCase = cases[sourceIndexPath.row]
+				images.remove(at: sourceIndexPath.row)
+				cases.remove(at: sourceIndexPath.row)
+				images.insert(moved, at: destinationIndexPath.row)
+				cases.insert(movedCase, at: destinationIndexPath.row)
+			}
+		}
+	}
+
+	
 	override func saveKnown() {
 		super.saveKnown()
 		
@@ -95,6 +116,7 @@ class PLLViewController:OLLViewController {
 		let title = navigationItem.rightBarButtonItem?.title
 		navigationItem.rightBarButtonItem?.title = (title?.contains("Edit"))! ? "Done" : "Edit"
 		isEditingKnown = !isEditingKnown
+		tableView.setEditing(isEditingKnown, animated: true)
 		if !isEditingKnown {
 			saveKnown()
 		}
