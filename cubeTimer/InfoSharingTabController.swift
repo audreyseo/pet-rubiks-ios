@@ -22,13 +22,27 @@ class InfoSharingTabController:UITabBarController {
 	
 	func loadData() -> Bool {
 		if storage.dictionary(forKey: sessionsKey) != nil {
-			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]
+//			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]
 			
-			data = sessions[keys[0]]!
+//			data = sessions[keys[0]]!
+			self.saveData()
 			return true
 		}
 		return false
+	}
+	
+	func getData() {
+		if storage.array(forKey: timeKeysKey) != nil {
+			keys = storage.array(forKey: timeKeysKey) as! [String]
+		}
 		
+		if currentSession != storage.integer(forKey: currentSessionKey) && storage.integer(forKey: currentSessionKey) < keys.count && storage.integer(forKey: currentSessionKey) >= 0 {
+			currentSession = storage.integer(forKey: currentSessionKey)
+		}
+		
+		if storage.dictionary(forKey: sessionsKey) != nil {
+			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]
+		}
 	}
 	
 	
@@ -41,13 +55,17 @@ class InfoSharingTabController:UITabBarController {
 		
 		if currentSession != storage.integer(forKey: currentSessionKey) && storage.integer(forKey: currentSessionKey) < keys.count {
 			currentSession = storage.integer(forKey: currentSessionKey)
+			print("Got current session: \(currentSession)")
 		}
 		saveCurrentSession()
 		
 		
 		if storage.dictionary(forKey: sessionsKey) != nil {
 			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]
+			data = sessions[keys[currentSession]]!
 		}
+		
+		sessions[keys[currentSession]] = data
 		
 		storage.set(sessions, forKey: sessionsKey)
 		
@@ -56,10 +74,10 @@ class InfoSharingTabController:UITabBarController {
 //			print("\(i): \(keys[i])")
 //		}
 //		
-		for (key, val) in sessions {
-			print("\(key): \(val)")
-		}
-		sessions[keys[currentSession]] = data
+//		for (key, val) in sessions {
+//			print("\(key): \(val)")
+//		}
+		
 	}
 	
 	func addData(newData:Int) {
@@ -69,7 +87,7 @@ class InfoSharingTabController:UITabBarController {
 	}
 	
 	func saveCurrentSession() {
-		print("Saving currentSession")
+		print("Saving currentSession: \(currentSession)")
 		storage.set(currentSession, forKey: currentSessionKey)
 	}
 	

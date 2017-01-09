@@ -36,6 +36,7 @@ class SessionViewController:TableVC {
 		let next = self.storyboard?.instantiateViewController(withIdentifier: "timesVC")
 		next?.navigationItem.title = "Times"
 		self.navigationController?.pushViewController(next!, animated: true)
+		tbc.saveData()
 	}
 	
 	func addNew() {

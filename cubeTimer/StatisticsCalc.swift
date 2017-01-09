@@ -238,7 +238,7 @@ class StatisticsCalc {
 	func last5() -> Double {
 		if data.count >= 5 {
 			let last = 5
-			return sliceMean(start: data.count - 1 - last, end: data.count)
+			return sliceMean(start: data.count - last, end: data.count)
 		}
 		return -1.0
 	}
@@ -246,7 +246,7 @@ class StatisticsCalc {
 	func last3of5() -> Double {
 		if data.count >= 5 {
 			let last = 5
-			return sliceMeanExclude(start: data.count - 1 - last, end: data.count)
+			return sliceMeanExclude(start: data.count - last, end: data.count)
 		}
 		return -1.0
 	}
@@ -254,7 +254,7 @@ class StatisticsCalc {
 	func last10() -> Double {
 		if data.count >= 10 {
 			let last = 10
-			return sliceMean(start: data.count - 1 - last, end: data.count)
+			return sliceMean(start: data.count - last, end: data.count)
 		}
 		return -1.0
 	}
@@ -262,7 +262,7 @@ class StatisticsCalc {
 	func last10of12() -> Double {
 		if data.count >= 12 {
 			let last = 12
-			return sliceMeanExclude(start: data.count - 1 - last, end: data.count)
+			return sliceMeanExclude(start: data.count - last, end: data.count)
 		}
 		return -1.0
 	}
@@ -271,7 +271,7 @@ class StatisticsCalc {
 		if data.count >= 100 {
 			let last = 100
 			print("Start: \(data.count - 1 - last)")
-			return sliceMean(start: max(data.count - 1 - last, 0), end: data.count)
+			return sliceMean(start: data.count - last, end: data.count)
 		}
 		return -1.0
 	}

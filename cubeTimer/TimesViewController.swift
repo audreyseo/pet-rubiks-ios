@@ -49,9 +49,9 @@ class TimesViewController: UITableViewController {
 			self.hasTabControl = true
 			
 			if tbc.data.count > 0 {
-				for i in 0...tbc.data.count - 1 {
-					print("Data \(i): \(tbc.data[i])")
-				}
+//				for i in 0...tbc.data.count - 1 {
+//					print("Data \(i): \(tbc.data[i])")
+//				}
 				oldSize = self.data.count
 				activeData = self.data
 				self.data = tbc.data
