@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TimesEditorViewController:UITableViewController {
-	var tbc:InfoSharingTabController? = InfoSharingTabController()
+class TimesEditorViewController:TableVC {
+//	var tbc:InfoSharingTabController? = InfoSharingTabController()
+	var conversion = TimeConversion()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// do stuff here
+		tableView.register(StatsCell.self, forCellReuseIdentifier: "statsId")
+		
 		navigationItem.title = "Times Editor"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(showEditingActions))
 		
@@ -30,7 +33,7 @@ class TimesEditorViewController:UITableViewController {
 			let alert = UIAlertController(title: "Clear All Times From Session", message: "Are you sure? This action cannot be undone.", preferredStyle: .alert)
 			let yesAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
 					print("Clearing times.")
-				self.tbc?.data = [Int]()
+				self.tbc.data = [Int]()
 			})
 			let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
 			alert.addAction(yesAction)
@@ -44,4 +47,32 @@ class TimesEditorViewController:UITableViewController {
 		alert.addAction(cancelAction)
 		self.present(alert, animated: true, completion: nil)
 	}
+	
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			tbc.removeData(ip: indexPath)
+			tableView.reloadData()
+		}
+	}
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let c = tableView.dequeueReusableCell(withIdentifier: "statsId") as! StatsCell
+		c.nameLabel.text = "\(indexPath.row + 1)"
+		c.statLabel.text = conversion.timeString(millis: tbc.data[indexPath.row])
+		return c
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if super.tableView(tableView, numberOfRowsInSection: section) == 0 {
+			return 0
+		} else {
+			return tbc.data.count
+		}
+	}
+	
+	
 }

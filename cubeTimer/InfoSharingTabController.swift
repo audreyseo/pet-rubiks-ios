@@ -127,6 +127,14 @@ class InfoSharingTabController:UITabBarController {
 		}
 	}
 	
+	func removeData(ip:IndexPath) {
+		if ip.row < data.count {
+			data.remove(at: ip.row)
+			sessions[keys[currentSession]] = data
+			saveCurrentState()
+		}
+	}
+	
 	func removeSession(ip:IndexPath) {
 		if ip.row < keys.count {
 			let removed:String = keys[ip.row]
