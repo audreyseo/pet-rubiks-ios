@@ -8,10 +8,26 @@
 
 import UIKit
 
+// Months need zero padding from 0 to 1
+//	unless the month is a word
+//	Can either have January, February, March, April, May, June, July, August, September, October, November, December or
+//					Jan,	 Feb,	   Mar,	  Apr,	 May, Jun,	Jul,  Aug,	  Sep,		 Oct,	  Nov,		Dec
+// Days need zero padding from 0 to 1
+// Years need zero padding from 0 to 1 unless full year, in which case 0
+// Could have day of the week, no padding necessary
+//	unless is a word
+//	Can either have Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+//  or				Mon,	Tue,	 Wed,		Thu,	  Fri,	  Sat,		Sun
+//  or				M		T		 W			Th		  F		  Sa		Su
+
+enum DateFormats {
+	
+}
 
 class DateFormatOptionsViewController: UICollectionViewController {
 	var titles:[String] = ["Format", "Options"]
 	var items:[[String]] = [["Full Month", "Day of Month", "Full Year"], ["2-digit Year", "0-Padded Month", "Month Digit", "Zero-Padded Day of Month"]]
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
