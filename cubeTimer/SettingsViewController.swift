@@ -16,14 +16,15 @@ class SettingsViewController: TableVC {
 	var userdef = UserDefaults()
 	var longPress:Float = 0.5
 	let sliderCellId = "sliderCellId"
+	let settingsCellId = "settingsCellId"
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		items = ["Long Press Delay"]
+		items = ["Long Press Delay", "About"]
 		
 		// more stuff here
 		
-		tableView.register(SliderCell.self, forCellReuseIdentifier: sliderCellId)
+		tableView.register(SettingsCell.self, forCellReuseIdentifier: settingsCellId)
 		
 		longPress = userdef.float(forKey: longPressKey)
 		if longPress < 0.1 || longPress > 5.0 {
@@ -40,16 +41,35 @@ class SettingsViewController: TableVC {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let name = items[indexPath.row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: settingsCellId) as! SettingsCell
 		if sliderItems.contains(name) {
-			let cell = tableView.dequeueReusableCell(withIdentifier: sliderCellId) as! SliderCell
-			cell.nameLabel.text = name
-			cell.valueLabel.text = "\(longPress)"
-			cell.setSlider(newValue: longPress)
-			cell.myTableViewController = self
-			return cell
+			cell.cellInit(name: name, value: longPress, tvc: self)
+		} else {
+			cell.cellInit(name: name, tvc: self)
+			cell.setType(newType: .rerouter)
+//			cell.setupViews()
+			cell.accessoryType = .disclosureIndicator
 		}
+		cell.setupViews()
 		
-		return tableView.dequeueReusableCell(withIdentifier: sliderCellId)!
+		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let name = items[indexPath.row]
+		if !sliderItems.contains(name) {
+			switch name {
+				case "About":
+				aboutFunction()
+			default:
+				break;
+			}
+		}
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
+	func aboutFunction() {
+		print("Show About page.")
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
