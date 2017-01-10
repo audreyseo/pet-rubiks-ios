@@ -90,7 +90,9 @@ class SettingsCell:UITableViewCell {
 		//print("Setting label.")
 		let raw:Float = cellSlider.value
 		let rawStr:String = "\(raw)"
-		valueLabel.text = rawStr.substring(to: rawStr.index(rawStr.startIndex, offsetBy: 5, limitedBy: rawStr.endIndex)!)
+		print("Start: \(rawStr.startIndex), End: \(rawStr.endIndex), \(5)")
+		let end = rawStr.index(rawStr.startIndex, offsetBy: 5, limitedBy: rawStr.endIndex)
+		valueLabel.text = end != nil ? rawStr.substring(to: end!) : rawStr
 		myTableViewController?.newSliderValue(value: raw)
 	}
 	

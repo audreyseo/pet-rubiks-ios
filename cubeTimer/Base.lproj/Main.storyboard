@@ -203,7 +203,7 @@
         <!--Date Format Options-->
         <scene sceneID="wi9-nG-rUd">
             <objects>
-                <collectionViewController title="Date Format Options" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FgG-oX-cHv" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="dateFormatOptionsVC" title="Date Format Options" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FgG-oX-cHv" customClass="DateFormatOptionsViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="RdY-fd-6cC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

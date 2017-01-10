@@ -77,6 +77,9 @@ class SettingsViewController: TableVC {
 	
 	func dateFormatOptionsFunction() {
 		print("Date Format Options Page")
+		let next = self.storyboard?.instantiateViewController(withIdentifier: "dateFormatOptionsVC")
+		next?.navigationItem.title = "Date Formatting Options"
+		self.navigationController?.pushViewController(next!, animated: true)
 	}
 	
 	func timesDisplayFunction() {
