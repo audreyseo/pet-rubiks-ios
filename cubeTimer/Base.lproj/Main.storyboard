@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,15 +22,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="llalalalalalallalalalallalalal lallalalalalallalalalalalallalallalalalalalalalalalalalalalallalalalla" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nB-BG-fdm">
-                                <rect key="frame" x="16" y="36" width="343" height="80"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkE-zW-HT4">
+                                <rect key="frame" x="43" y="272" width="289" height="122"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="87"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00.000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkE-zW-HT4">
-                                <rect key="frame" x="43" y="252" width="289" height="122"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="87"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="llalalalalalallalalalallalalal lallalalalalallalalalalalallalallalalalalalalalalalalalalalallalalalla" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nB-BG-fdm">
+                                <rect key="frame" x="16" y="92" width="343" height="80"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -38,10 +38,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="mkE-zW-HT4" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="232" id="752-Ei-Xym"/>
+                            <constraint firstItem="mkE-zW-HT4" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="Fsr-k5-jam"/>
+                            <constraint firstItem="3nB-BG-fdm" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="72" id="Lug-Va-BS8"/>
                             <constraint firstItem="3nB-BG-fdm" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Mqp-qc-0r8"/>
-                            <constraint firstItem="3nB-BG-fdm" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="height" multiplier="343:667" id="cmi-jL-TBT"/>
-                            <constraint firstItem="3nB-BG-fdm" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="tXV-X2-nFr"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="3nB-BG-fdm" secondAttribute="leading" id="ZSw-pa-iSa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3nB-BG-fdm" secondAttribute="trailing" id="fE9-67-dhE"/>
                             <constraint firstItem="mkE-zW-HT4" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="wzW-Hg-QWc"/>
                         </constraints>
                         <connections>
@@ -75,7 +76,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="750" y="-887"/>
+            <point key="canvasLocation" x="749.60000000000002" y="-887.40629685157433"/>
         </scene>
         <!--SessionVC-->
         <scene sceneID="jyQ-Vq-bDe">
