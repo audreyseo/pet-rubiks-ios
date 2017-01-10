@@ -9,7 +9,7 @@
 import UIKit
 
 enum SettingsCellType {
-	case slider, rerouter
+	case slider, rerouter, switcher
 }
 
 class SettingsCell:UITableViewCell {
@@ -57,6 +57,13 @@ class SettingsCell:UITableViewCell {
 		return sl
 	}()
 	
+	let cellSwitch: UISwitch = {
+		let sw = UISwitch()
+		sw.translatesAutoresizingMaskIntoConstraints = false
+		sw.isOn = false
+		return sw
+	}()
+	
 	func cellInit(name: String, value: Float, tvc: SettingsViewController) {
 		nameLabel.text = name
 		setSlider(newValue: value)
@@ -66,6 +73,12 @@ class SettingsCell:UITableViewCell {
 	
 	func cellInit(name: String, tvc: SettingsViewController) {
 		nameLabel.text = name
+		myTableViewController = tvc
+	}
+	
+	func cellInit(name: String, switchState: Bool, tvc: SettingsViewController) {
+		nameLabel.text = name
+		cellSwitch.isOn = switchState
 		myTableViewController = tvc
 	}
 	

@@ -12,6 +12,7 @@ import UIKit
 class SettingsViewController: TableVC {
 	
 	var sliderItems = ["Long Press Delay"]
+	var switchItems = ["Use Current Date for New Session Names"]
 	var longPressKey = "longPressDelayKey"
 	var userdef = UserDefaults()
 	var longPress:Float = 0.5
@@ -20,7 +21,7 @@ class SettingsViewController: TableVC {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		items = ["Long Press Delay", "About"]
+		items = ["Long Press Delay", "Times Display", "About", "Use Current Date for New Session Names", "Date Format Options"]
 		
 		// more stuff here
 		
@@ -44,6 +45,8 @@ class SettingsViewController: TableVC {
 		let cell = tableView.dequeueReusableCell(withIdentifier: settingsCellId) as! SettingsCell
 		if sliderItems.contains(name) {
 			cell.cellInit(name: name, value: longPress, tvc: self)
+		} else if switchItems.contains(name) {
+			cell.cellInit(name: name, switchState: false, tvc: self)
 		} else {
 			cell.cellInit(name: name, tvc: self)
 			cell.setType(newType: .rerouter)
@@ -61,11 +64,23 @@ class SettingsViewController: TableVC {
 			switch name {
 				case "About":
 				aboutFunction()
+				case "Times Display":
+				timesDisplayFunction()
+				case "Date Format Options":
+				dateFormatOptionsFunction()
 			default:
 				break;
 			}
 		}
 		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
+	func dateFormatOptionsFunction() {
+		print("Date Format Options Page")
+	}
+	
+	func timesDisplayFunction() {
+		print("Show Times Display page")
 	}
 	
 	func aboutFunction() {

@@ -8,17 +8,42 @@
 
 import Foundation
 
+enum TimeTypes {
+	case minSecMil(minPad:Bool)
+	case hrMinSecMil(hrPad:Bool)
+	case secMil(secPad:Bool)
+	case grow(pad:Bool)
+}
 
 class TimeConversion {
 	let millisPerSecond:Int = 1000
 	let secondsPerMinute:Int = 60
 	let minutesPerHour:Int = 60
+	var timeType:TimeTypes = .secMil(secPad: true)
 	
 	init() {
 		// Empty
 	}
 	
+	init(newType:TimeTypes) {
+		timeType = newType
+	}
+	
 	func timeString(millis:Int) -> String {
+		switch timeType {
+		case .minSecMil(minPad: true):
+			return "\(paddedMinutes(millis: millis)):\(paddedSeconds(millis: millis)).\(paddedMillis(millis:millis))"
+		case .minSecMil(minPad: false):
+			return "\(minutesFromMilliseconds(millis: millis)):\(paddedSeconds(millis: millis)).\(paddedMillis(millis:millis))"
+			
+		case .secMil(secPad: true):
+			return "\(paddedSeconds(millis: millis)).\(paddedMillis(millis: millis))"
+		case .secMil(secPad: false):
+			return "\(secondsFromMilliseconds(millis: millis)).\(paddedMillis(millis: millis))"
+		default:
+			break;
+		}
+		
 		if minutesFromMilliseconds(millis: millis) < 1 {
 			return "\(paddedSeconds(millis: millis)).\(paddedMillis(millis: millis))"
 		} else {
