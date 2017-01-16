@@ -32,7 +32,9 @@ class CubeCaseCell:UITableViewCell {
 		label.text = "Sample Item"
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.systemFont(ofSize: 14)
+		label.adjustsFontSizeToFitWidth = true
 		label.numberOfLines = 0
+		label.textAlignment = .center
 		return label
 	}()
 	
@@ -42,6 +44,7 @@ class CubeCaseCell:UITableViewCell {
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = UIFont.systemFont(ofSize: 11)
 		label.numberOfLines = 0
+		label.baselineAdjustment = .alignCenters
 		return label
 	}()
 	
@@ -106,7 +109,7 @@ class CubeCaseCell:UITableViewCell {
 				algStacker.addSubview(algLabel1)
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel1]))
-				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-[v1]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
 				
 			} else {
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
@@ -117,8 +120,10 @@ class CubeCaseCell:UITableViewCell {
 		imageNameStack.addSubview(self.customImageView)
 		imageNameStack.addSubview(self.nameLabel)
 		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[v0(50)]-2-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView]))
-		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[v0(>=10)]-2-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
-		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0(50)]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView, "v1": self.nameLabel]))
+		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v0(60)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+		imageNameStack.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .centerX, relatedBy: .equal, toItem: customImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
+		
+		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0(50)]-[v1(<=15)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView, "v1": self.nameLabel]))
 		
 		
 		
@@ -139,11 +144,12 @@ class CubeCaseCell:UITableViewCell {
 		
 		//		actionButton.addTarget(self, action: "handleAction", forControlEvents: .TouchUpInside)
 		
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(<=60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2"
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2"
 			: algStacker]))
 //		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-55-[v0]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": sepView]))
 		//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-85-[v0(>=15)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": probLabel, "v2"
 		//			: algStacker]))
+		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(70)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack]))
 //		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
