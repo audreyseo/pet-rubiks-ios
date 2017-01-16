@@ -9,10 +9,12 @@
 import UIKit
 
 enum FormCellType {
-	case fillInTheBlank, pickDate, pickerWithDefault, pickerWithoutDefault
+	case fillInTheBlank, pickDate, pickerWithDefault, pickerWithoutDefault, blankWithButton
 }
 
 class FormCell:UITableViewCell {
+	var type:FormCellType = .fillInTheBlank
+	
 	let nameLabel:UILabel = {
 		let label = UILabel()
 		label.text = "Sample"
@@ -31,9 +33,19 @@ class FormCell:UITableViewCell {
 		return text
 	}()
 	
+	let button:UIButton = {
+		let b = UIButton(type: .system)
+		b.translatesAutoresizingMaskIntoConstraints = false
+		b.setTitle("Sample Button", for: .normal)
+//		b.titleLabel!.text = "Sample Button"
+		b.titleLabel!.adjustsFontSizeToFitWidth = true
+		
+		return b
+	}()
+	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		setupViews()
+//		setupViews()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -48,15 +60,59 @@ class FormCell:UITableViewCell {
 		print("Value: \(blank.text)")
 	}
 	
+	func setButtonText(newText: String) {
+		button.setTitle(newText, for: .normal)
+	}
+	
+	func changeType(newType: FormCellType) {
+		self.type = newType
+		setupViews()
+	}
+	
 	func setupViews() {
+		
+//		nameLabel.removeFromSuperview()
+//		blank.removeFromSuperview()
+//		button.removeFromSuperview()
+		
+		switch self.type {
+		case .fillInTheBlank:
+			setupFillInBlank()
+		case .blankWithButton:
+			setupBlankWithButton()
+		default:
+			break
+		}
+		
+//		addSubview(nameLabel)
+//		addSubview(blank)
+//		
+//		myConstraints(vf: "H:|-16-[v0]-[v1(>=80)]-16-|", views: ["v0": nameLabel, "v1": blank])
+//		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": nameLabel])
+//		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": blank])
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-[v1]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": blank]))
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": blank]))
+	}
+	
+	func setupFillInBlank() {
 		addSubview(nameLabel)
 		addSubview(blank)
 		
 		myConstraints(vf: "H:|-16-[v0]-[v1(>=80)]-16-|", views: ["v0": nameLabel, "v1": blank])
 		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": nameLabel])
 		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": blank])
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-[v1]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": blank]))
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-4-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": blank]))
+	}
+	
+	func setupBlankWithButton() {
+		addSubview(nameLabel)
+		addSubview(blank)
+		addSubview(button)
+		
+		myConstraints(vf: "H:|-16-[v0]-[v1(>=80)]-[v2(>=30)]-16-|", views: ["v0": nameLabel, "v1": blank, "v2": button])
+		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": nameLabel])
+		myConstraints(vf: "V:|-4-[v0]-4-|", views: ["v0": blank])
+		addConstraint(NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+//		myConstraints(vf: "V:|-4-[v0(10)]-4-|", views: ["v0": button])
 	}
 }

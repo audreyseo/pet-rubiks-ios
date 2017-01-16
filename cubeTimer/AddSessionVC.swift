@@ -11,6 +11,9 @@ import UIKit
 class AddSessionViewController:TableVC, UITextFieldDelegate {
 //	var tbc = InfoSharingTabController()
 	var session = ""
+	var itemTypes: [FormCellType] = [FormCellType]()
+	var itemFunctions: [Selector] = [Selector]()
+	var blanks: [UITextField] = [UITextField]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -18,6 +21,8 @@ class AddSessionViewController:TableVC, UITextFieldDelegate {
 		
 		tableView.register(FormCell.self, forCellReuseIdentifier: "formId")
 		items = ["Session Name"]
+		itemTypes = [.blankWithButton]
+		itemFunctions = [#selector(runWhenButtonPressed)]
 		
 		self.tbc = self.tabBarController as! InfoSharingTabController
 	}
@@ -34,6 +39,10 @@ class AddSessionViewController:TableVC, UITextFieldDelegate {
 		cell.nameLabel.text = items[indexPath.row]
 		cell.blank.placeholder = "sessionName"
 		cell.blank.delegate = self
+		blanks.append(cell.blank)
+		cell.setButtonText(newText: "Use Date")
+		cell.button.addTarget(self, action: itemFunctions[indexPath.row], for: .touchUpInside)
+		cell.changeType(newType: itemTypes[indexPath.row])
 		return cell
 	}
 	
@@ -42,6 +51,17 @@ class AddSessionViewController:TableVC, UITextFieldDelegate {
 		if parent == nil {
 			print("This VC is 'will' be popped. i.e. the back button was pressed.")
 		}
+	}
+	
+	func runWhenButtonPressed() {
+		print("\nButton was pressed\n")
+		
+		let today = Date()
+		let formatter = DateFormatter()
+		formatter.locale = Locale(identifier: "en_US_POSIX")
+		formatter.dateFormat = "yyyy MMMM dd"
+		
+		blanks[0].text = formatter.string(from: today)
 	}
 	
 	
