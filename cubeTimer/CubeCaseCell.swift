@@ -88,9 +88,9 @@ class CubeCaseCell:UITableViewCell {
 		super.layoutSubviews()
 		self.imageView?.removeFromSuperview()
 		
-		if self.isEditing {
-			setupViews()
-		}
+//		if self.isEditing {
+//			setupViews()
+//		}
 		
 //		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 //		self.separatorStyle = .singleLine
@@ -135,14 +135,21 @@ class CubeCaseCell:UITableViewCell {
 //		let sepView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width - 55, height: 1))
 //		sepView.backgroundColor = UIColor.gray
 		//		addSubview(sepView)
-		//		addSubview(nameLabel)
-		//addSubview(algLabel)
-		//		if self.isEditing {
-		//			removeConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]))
-		//		}
-		//
 		
-		//		addSubview(statLabel)
+		
+		self.contentView.addSubview(imageNameStack)
+//		addSubview(nameLabel)
+		self.contentView.addSubview(probLabel)
+		self.contentView.addSubview(algStacker)
+		//addSubview(algLabel)
+		
+		
+//		if self.isEditing {
+//			removeConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]))
+//		}
+//		
+		
+//		addSubview(statLabel)
 		//		addSubview(actionButton)
 		
 		//		actionButton.addTarget(self, action: "handleAction", forControlEvents: .TouchUpInside)
@@ -151,14 +158,8 @@ class CubeCaseCell:UITableViewCell {
 		//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-85-[v0(>=15)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel, "v1": probLabel, "v2"
 		//			: algStacker]))
 		//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
-		
-		
-		self.contentView.addSubview(imageNameStack)
-		self.contentView.addSubview(probLabel)
-		self.contentView.addSubview(algStacker)
-		
-		
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(horizontalPadding)-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-\(horizontalPadding)-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]))
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(horizontalPadding)-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-\(horizontalPadding)-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2"
+			: algStacker]))
 		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(70)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack]))
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
