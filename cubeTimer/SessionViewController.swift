@@ -62,6 +62,8 @@ class SessionViewController:TableVC {
 		myCell.nameLabel.text = tbc.keys[indexPath.row]
 		if indexPath.row == tbc.currentSession {
 			myCell.checkOff()
+		} else {
+			myCell.defaultImage()
 		}
 			return myCell
 		//		if indexPath.row == 0 {
