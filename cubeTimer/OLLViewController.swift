@@ -81,6 +81,9 @@ class OLLViewController:UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registrationStuff()
+		
+		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.estimatedRowHeight = 140
 	}
 	
 	func registrationStuff() {
@@ -161,6 +164,10 @@ class OLLViewController:UITableViewController {
 		}
 	}
 	
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		cell.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
+	}
+	
 	func moveRows(source:IndexPath, dest:IndexPath) {
 		if source.section >= 0 && source.row >= 0 && dest.section >= 0 && dest.row >= 0 {
 			if source.section == 1 {
@@ -199,10 +206,10 @@ class OLLViewController:UITableViewController {
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
 		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
 		let image = UIImage(named: imageName(ip: indexPath))
-		myCell.imageView?.image = image
+		myCell.customImageView.image = image
 		
-		myCell.imageView?.frame.size.width = 50
-		myCell.imageView?.frame.size.height = 50
+		myCell.customImageView.frame.size.width = 50
+		myCell.customImageView.frame.size.height = 50
 		return myCell
 	}
 	
@@ -220,11 +227,17 @@ class OLLViewController:UITableViewController {
 		} else {
 			tableView.deselectRow(at: indexPath, animated: true)
 		}
+		let c = tableView.cellForRow(at: indexPath)
+		print("Separator Insets for cell at (\(indexPath.section), \(indexPath.row)): Left: \(c?.separatorInset.left), Right: \(c?.separatorInset.right)")
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 55
 	}
+	
+//	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//		return 55
+//	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if titles[section].contains("Unknown") {

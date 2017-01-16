@@ -168,10 +168,10 @@ class PLLViewController:OLLViewController {
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)
 		myCell.algLabel1.text = secondAlgLabel(ip: indexPath)
 		let image = UIImage(named: imageNameForLabel(ip: indexPath))
-		myCell.imageView?.image = image
+		myCell.customImageView.image = image
 		
-		myCell.imageView?.frame.size.width = 50
-		myCell.imageView?.frame.size.height = 50
+		myCell.customImageView.frame.size.width = 50
+		myCell.customImageView.frame.size.height = 50
 		return myCell
 	}
 	
@@ -194,11 +194,18 @@ class PLLViewController:OLLViewController {
 		} else {
 			tableView.deselectRow(at: indexPath, animated: true)
 		}
+		
+		let c = tableView.cellForRow(at: indexPath)
+		print("Separator Insets for cell at (\(indexPath.section), \(indexPath.row)): Left: \(c?.separatorInset.left), Right: \(c?.separatorInset.right)")
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 55
 	}
+	
+//	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//		return 55
+//	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if titles[section].contains("Unknown") {
