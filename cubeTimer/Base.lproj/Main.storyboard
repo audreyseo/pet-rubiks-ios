@@ -152,7 +152,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9nR-J9-Hfh" id="Tpe-J2-j5T">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -181,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNh-tr-MEh" id="GVl-Ud-blV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -194,6 +194,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="UCY-VQ-jzV"/>
                     <connections>
                         <segue destination="FgG-oX-cHv" kind="show" identifier="dateFormatOptionsSegue" id="rt8-4y-vHI"/>
+                        <segue destination="i7L-tT-pbf" kind="show" identifier="aboutSegue" id="KAy-Ud-L9F"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q7Z-Fd-cQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -204,7 +205,7 @@
         <scene sceneID="wi9-nG-rUd">
             <objects>
                 <collectionViewController storyboardIdentifier="dateFormatOptionsVC" title="Date Format Options" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FgG-oX-cHv" customClass="DateFormatOptionsViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="RdY-fd-6cC">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="RdY-fd-6cC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -228,6 +229,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQx-5U-AjQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2621.5999999999999" y="1763.568215892054"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="O7f-dh-PFl">
+            <objects>
+                <tableViewController storyboardIdentifier="aboutVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="i7L-tT-pbf" customClass="AboutViewController" customModule="cubeTimer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3kc-Tk-dV5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="aboutId" id="TXl-jM-CIL" customClass="AboutCell" customModule="cubeTimer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TXl-jM-CIL" id="4cS-e9-IFM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="i7L-tT-pbf" id="hCN-cl-Yep"/>
+                            <outlet property="delegate" destination="i7L-tT-pbf" id="HTf-CT-jHY"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b66-Lo-9zm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2612" y="2461"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cPs-jg-cFl">

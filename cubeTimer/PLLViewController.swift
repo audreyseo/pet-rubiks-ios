@@ -208,7 +208,7 @@ class PLLViewController:OLLViewController {
 //	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if titles[section].contains("Unknown") {
+		if titles[section].contains("Learning") {
 			return cases.count
 		} else {
 			return knownCases.count

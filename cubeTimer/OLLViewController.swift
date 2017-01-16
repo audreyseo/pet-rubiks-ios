@@ -10,7 +10,7 @@ import UIKit
 
 class OLLViewController:UITableViewController {
 	var images:[String] = Array(repeating: "", count: 58)
-	var titles:[String] = ["Unknown", "Known"]
+	var titles:[String] = ["Learning", "Learned"]
 	var knownCases:[String] = [String]()
 	var isEditingKnown = false
 	var userdef = UserDefaults()
@@ -125,7 +125,7 @@ class OLLViewController:UITableViewController {
 
 	
 	func imageName(ip: IndexPath) -> String {
-		if titles[ip.section].contains("Known") {
+		if titles[ip.section].contains("Learned") {
 			return knownCases[ip.row]
 		}
 		return images[ip.row]
@@ -240,7 +240,7 @@ class OLLViewController:UITableViewController {
 //	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if titles[section].contains("Unknown") {
+		if titles[section].contains("Learning") {
 			return images.count
 		} else {
 			return knownCases.count

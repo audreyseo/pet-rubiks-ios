@@ -88,6 +88,9 @@ class SettingsViewController: TableVC {
 	
 	func aboutFunction() {
 		print("Show About page.")
+		let next = self.storyboard?.instantiateViewController(withIdentifier: "aboutVC")
+		next?.navigationItem.title = "About"
+		self.navigationController?.pushViewController(next!, animated: true)
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
