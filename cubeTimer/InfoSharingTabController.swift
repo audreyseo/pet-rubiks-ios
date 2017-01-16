@@ -117,6 +117,10 @@ class InfoSharingTabController:UITabBarController {
 		return keys[currentSession].contains(title)
 	}
 	
+	func getCurrentSession() -> String {
+		return keys[currentSession]
+	}
+	
 	func changeCurrentSession(ip: IndexPath)  {
 		if ip.row < keys.count {
 			sessions[keys[currentSession]] = data

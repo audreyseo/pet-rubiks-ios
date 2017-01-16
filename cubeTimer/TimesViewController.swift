@@ -160,7 +160,7 @@ class TimesViewController: UITableViewController {
 			let fileManager = FileManager.default
 			let fileFolder = String(describing: (fileManager.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.allDomainsMask))[0])
 //			let fileFolder = fileFolders
-			var fileUrl = URL(fileURLWithPath: "\(fileFolder)/session_data.csv", isDirectory: false)
+			var fileUrl = URL(fileURLWithPath: "\(fileFolder)/\(self.tbc.getCurrentSession())", isDirectory: false)
 			let folderUrl = URL(fileURLWithPath: "\(fileFolder)", isDirectory: true)
 			
 			print("\nWorking directory: \(fileManager.currentDirectoryPath)")
@@ -173,7 +173,7 @@ class TimesViewController: UITableViewController {
 				//print("New path: \(url)")
 				self.examineFolder()
 				let fullFolderPath = (folderUrl.appendingPathComponent("cubeStuff")).path
-				fileUrl = URL(fileURLWithPath:  "\(fullFolderPath)/session_data.csv", isDirectory: false)
+				fileUrl = URL(fileURLWithPath:  "\(fullFolderPath)/\(self.tbc.getCurrentSession()).csv", isDirectory: false)
 				
 				
 				//fileManager.changeCurrentDirectoryPath(fileFolder)
