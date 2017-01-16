@@ -82,8 +82,8 @@ class OLLViewController:UITableViewController {
 		super.viewDidLoad()
 		registrationStuff()
 		
-//		tableView.rowHeight = UITableViewAutomaticDimension
-//		tableView.estimatedRowHeight = 140
+		tableView.rowHeight = UITableViewAutomaticDimension
+		tableView.estimatedRowHeight = 140
 	}
 	
 	func registrationStuff() {
@@ -210,7 +210,6 @@ class OLLViewController:UITableViewController {
 		
 		myCell.customImageView.frame.size.width = 50
 		myCell.customImageView.frame.size.height = 50
-//		myCell.frame.size.height = 80
 		return myCell
 	}
 	
@@ -232,12 +231,8 @@ class OLLViewController:UITableViewController {
 		print("Separator Insets for cell at (\(indexPath.section), \(indexPath.row)): Left: \(c?.separatorInset.left), Right: \(c?.separatorInset.right)")
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 70
-	}
-	
 	override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 70
+		return 55
 	}
 	
 //	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
