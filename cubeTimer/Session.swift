@@ -19,10 +19,11 @@ class Session {
 	var timeStamps:[Date]
 	var userDefsKey:String
 	var defs = UserDefaults()
+	var converter = TimeConversion()
 	
 	init(name:String) {
 		self.name = name
-		userDefsKey = "\(name)Key"
+		userDefsKey = "\(name)SessionKey"
 		
 		startDate = Date.init()
 		endDate = Date.init()
@@ -55,6 +56,10 @@ class Session {
 		}
 	}
 	
+	func getName() -> String {
+		return self.name
+	}
+	
 	func append(newValue:Int) {
 		data += [newValue]
 		numTimes = data.count
@@ -83,5 +88,16 @@ class Session {
 		}
 		// Value that means something went wrong
 		return -1
+	}
+	
+	func csvData() -> String {
+		var rowArray:[String] = [String]()
+		
+		rowArray.append("time,millis,timeStamp")
+		
+		for i in 0..<data.count {
+			rowArray.append("\(converter.timeString(millis: data[i])),\(data[i]),\(timeStamps[i])")
+		}
+		return rowArray.joined(separator: "\n")
 	}
 }
