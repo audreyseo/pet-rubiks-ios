@@ -29,6 +29,10 @@ class TimerViewController: UIViewController {
 	var minimumPressDur:Double = -1.0
 	var userdef = UserDefaults()
 	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
+	}
+	
 	
 	var longPressKey = "longPressDelayKey"
 	
