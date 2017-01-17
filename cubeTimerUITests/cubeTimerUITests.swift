@@ -28,7 +28,7 @@ class cubeTimerUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func DISABLED_testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

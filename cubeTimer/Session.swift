@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Session {
+class Session:NSObject {
 	var name:String
 	var cubeType:String?
 	var cubeManufacturer:String?
@@ -21,8 +21,10 @@ class Session {
 	var defs = UserDefaults()
 	var converter = TimeConversion()
 	
+	
 	init(name:String) {
 		self.name = name
+		
 		userDefsKey = "\(name)SessionKey"
 		
 		startDate = Date.init()
@@ -30,6 +32,7 @@ class Session {
 		numTimes = 0
 		data = [Int]()
 		timeStamps = [Date]()
+		super.init()
 		
 		get()
 		save()
