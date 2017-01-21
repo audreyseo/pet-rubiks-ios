@@ -51,7 +51,7 @@
                             <outletCollection property="gestureRecognizers" destination="Al8-rt-fQx" appends="YES" id="o4c-ab-Q3m"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timer" image="timer-icon" selectedImage="timer-icon-full" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Timer" image="alarm-clock-icon" selectedImage="alarm-clock-icon-full" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="longPress" destination="viy-hG-A1T" id="OFq-Xj-7sG"/>
                         <outlet property="panPress" destination="Al8-rt-fQx" id="xDV-CM-Ue9"/>
@@ -386,11 +386,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="alarm-clock-icon" width="30" height="30"/>
+        <image name="alarm-clock-icon-full" width="30" height="30"/>
         <image name="oll-icon" width="30" height="30"/>
         <image name="pll-icon" width="30" height="30"/>
         <image name="stats-icon" width="30" height="30"/>
         <image name="stats-icon-full" width="30" height="30"/>
-        <image name="timer-icon" width="30" height="30"/>
-        <image name="timer-icon-full" width="30" height="30"/>
     </resources>
 </document>
