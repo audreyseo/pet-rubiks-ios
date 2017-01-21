@@ -24,6 +24,7 @@ class InfoSharingTabController:UITabBarController {
 		"AboutCell": "aboutCellId",
 		"DateFormatCell": "dateFormatCellId",
 		"CubeCaseCell": "cubeCaseCellId",
+		"EditableCubeCaseCell": "editableCubeCaseCellId",
 		"FormCell": "formCellId",
 		"SessionCell": "sessionCellId",
 		"SliderCell": "sliderCellId",
