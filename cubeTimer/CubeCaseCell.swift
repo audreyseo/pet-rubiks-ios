@@ -117,8 +117,6 @@ class CubeCaseCell:UITableViewCell {
 		addLayoutConstraint(format: "V:|-8-[v2]-8-|", viewsDictionary: viewsDict)
 		
 		addConstraint(equalityConstraint(item: algStacker, other: self, attributeToUse: .centerY))
-		
-		//addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 	}
 	
 	func setupAlgorithmStackView() {
