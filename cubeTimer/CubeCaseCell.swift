@@ -91,7 +91,7 @@ class CubeCaseCell:UITableViewCell {
 	}
 	
 	func setupViews() {
-		var viewsDict: [String: Any] = ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]
+		let viewsDict: [String: Any] = ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 		
@@ -108,15 +108,11 @@ class CubeCaseCell:UITableViewCell {
 		
 		// Add constraints
 		addLayoutConstraint(format: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", viewsDictionary: viewsDict)
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]))
-		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-		
 		addLayoutConstraint(format: "V:|-8-[v0(70)]-8-|", viewsDictionary: viewsDict)
 		addLayoutConstraint(format: "V:|-8-[v1]-8-|", viewsDictionary: viewsDict)
 		addLayoutConstraint(format: "V:|-8-[v2]-8-|", viewsDictionary: viewsDict)
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(70)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack]))
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
-//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algStacker]))
+		
+		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 	}
 	
 	func setupAlgorithmStackView() {
