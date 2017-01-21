@@ -86,10 +86,40 @@ class CubeCaseCell:UITableViewCell {
 		self.imageView?.removeFromSuperview()
 	}
 	
+	func addLayoutConstraint(format: String, viewsDictionary: [String: Any]) {
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+	}
+	
 	func setupViews() {
+		var viewsDict: [String: Any] = ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 		
+		// Setup other subviews
+		self.setupAlgorithmStackView()
+		self.setupImageStackView()
+		
+		
+		// Add subviews
+		addSubview(imageNameStack)
+		addSubview(probLabel)
+		addSubview(algStacker)
+		
+		
+		// Add constraints
+		addLayoutConstraint(format: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", viewsDictionary: viewsDict)
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]))
+		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+		
+		addLayoutConstraint(format: "V:|-8-[v0(70)]-8-|", viewsDictionary: viewsDict)
+		addLayoutConstraint(format: "V:|-8-[v1]-8-|", viewsDictionary: viewsDict)
+		addLayoutConstraint(format: "V:|-8-[v2]-8-|", viewsDictionary: viewsDict)
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(70)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack]))
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
+//		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algStacker]))
+	}
+	
+	func setupAlgorithmStackView() {
 		if algLabel.text != "" {
 			algLabel.removeFromSuperview()
 			algLabel1.removeFromSuperview()
@@ -106,7 +136,9 @@ class CubeCaseCell:UITableViewCell {
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=27-[v0]->=27-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 			}
 		}
-		
+	}
+	
+	func setupImageStackView() {
 		imageNameStack.addSubview(self.customImageView)
 		imageNameStack.addSubview(self.nameLabel)
 		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[v0(50)]-5-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView]))
@@ -114,17 +146,5 @@ class CubeCaseCell:UITableViewCell {
 		imageNameStack.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .centerX, relatedBy: .equal, toItem: customImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
 		
 		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0(50)]-[v1(<=15)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView, "v1": self.nameLabel]))
-		
-		
-		addSubview(imageNameStack)
-		addSubview(probLabel)
-		addSubview(algStacker)
-		
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(60)]-4-[v2]->=4-[v1(>=20,<=35)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack, "v1": probLabel, "v2"
-			: algStacker]))
-		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0(70)]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageNameStack]))
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": probLabel]))
-		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algStacker]))
 	}
 }
