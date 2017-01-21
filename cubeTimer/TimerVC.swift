@@ -211,7 +211,8 @@ class TimerViewController: UIViewController {
 					alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
 						//					print("Dropping last")
 						if self.tbc.data.startIndex != self.tbc.data.endIndex - 1 {
-							self.tbc.data.popLast()
+							self.tbc.data.removeLast(1)
+//							self.tbc.data.popLast()
 						} else {
 							self.tbc.data.remove(at: self.tbc.data.startIndex)
 						}

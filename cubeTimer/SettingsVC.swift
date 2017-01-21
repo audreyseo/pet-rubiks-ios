@@ -16,12 +16,15 @@ class SettingsViewController: TableVC {
 	var longPressKey = "longPressDelayKey"
 	var userdef = UserDefaults()
 	var longPress:Float = 0.5
-	let sliderCellId = "sliderCellId"
-	let settingsCellId = "settingsCellId"
+	var sliderCellId: String!
+	var settingsCellId: String!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		items = ["Long Press Delay", "Times Display", "About", "Use Current Date for New Session Names", "Date Format Options"]
+		
+		sliderCellId = tbc.cellReuseIds["SliderCell"]
+		settingsCellId = tbc.cellReuseIds["SettingsCell"]
 		
 		// more stuff here
 		

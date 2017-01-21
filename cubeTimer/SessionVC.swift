@@ -11,10 +11,14 @@ import UIKit
 class SessionViewController:TableVC {
 	//var tbc = InfoSharingTabController()
 	
+	var sessionId: String! {
+		return self.tbc.cellReuseIds["SessionCell"]
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// do stuff here
-		tableView.register(SessionCell.self, forCellReuseIdentifier: "sessionId")
+		tableView.register(SessionCell.self, forCellReuseIdentifier: sessionId)
 		tableView.register(FormCell.self, forCellReuseIdentifier: "formId")
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneFunction))
 		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add New...", style: .plain, target: self, action: #selector(addNew))
@@ -58,7 +62,7 @@ class SessionViewController:TableVC {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let myCell = tableView.dequeueReusableCell(withIdentifier: "sessionId") as! SessionCell
+		let myCell = tableView.dequeueReusableCell(withIdentifier: sessionId) as! SessionCell
 		myCell.nameLabel.text = tbc.keys[indexPath.row]
 		if indexPath.row == tbc.currentSession {
 			myCell.checkOff()

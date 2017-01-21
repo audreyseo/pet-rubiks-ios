@@ -181,7 +181,7 @@ class TimesViewController: UITableViewController {
 				//rint("Changed directories")
 				if !fileManager.fileExists(atPath: fileUrl.path) {
 					print("\nAttempting to create file at path \(fileUrl.path)...")
-					let myData = csvContents.data(using: String.Encoding.utf8)
+//					let myData = csvContents.data(using: String.Encoding.utf8)
 					let successful = fileManager.createFile(atPath: fileUrl.path, contents: nil, attributes: nil)
 					print("Created file: \(successful).")
 					print("File exists: \(fileManager.fileExists(atPath: fileUrl.path))")

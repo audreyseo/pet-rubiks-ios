@@ -11,11 +11,15 @@ import UIKit
 class TimesEditorViewController:TableVC {
 //	var tbc:InfoSharingTabController? = InfoSharingTabController()
 	var conversion = TimeConversion()
+	var statsId: String {
+		return self.tbc.cellReuseIds["StatsCell"]!
+	}
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// do stuff here
-		tableView.register(StatsCell.self, forCellReuseIdentifier: "statsId")
+		tableView.register(StatsCell.self, forCellReuseIdentifier: statsId)
 		
 		navigationItem.title = "Times Editor"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(showEditingActions))
@@ -60,7 +64,7 @@ class TimesEditorViewController:TableVC {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let c = tableView.dequeueReusableCell(withIdentifier: "statsId") as! StatsCell
+		let c = tableView.dequeueReusableCell(withIdentifier: statsId) as! StatsCell
 		c.nameLabel.text = "\(indexPath.row + 1)"
 		c.statLabel.text = conversion.timeString(millis: tbc.data[indexPath.row])
 		return c

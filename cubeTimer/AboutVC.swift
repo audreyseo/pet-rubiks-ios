@@ -28,7 +28,7 @@ class AboutViewController:UITableViewController, MFMailComposeViewControllerDele
 		"Consultants",
 		"Graphics",
 		"Claire Seo",
-		"App Icon",
+		"App Icon Designer",
 		"Audrey Seo",
 		"Comments? Questions? Bugs? Email me."]
 	let types:[AboutCellStyle] = [
@@ -52,10 +52,16 @@ class AboutViewController:UITableViewController, MFMailComposeViewControllerDele
 		.button
 	]
 	
-	let aboutId = "aboutId"
+	var aboutId: String!
+	var tbc: InfoSharingTabController!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.tbc = self.tabBarController as! InfoSharingTabController
+		
+		aboutId = self.tbc.cellReuseIds["AboutCell"]
+		
 		tableView.separatorStyle = .none
 		tableView.register(AboutCell.self, forCellReuseIdentifier: aboutId)
 		

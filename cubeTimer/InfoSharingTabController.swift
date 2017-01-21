@@ -20,6 +20,17 @@ class InfoSharingTabController:UITabBarController {
 	var currentSession:Int = 0
 	let currentSessionKey:String = "currentSessionKey"
 	
+	var cellReuseIds: [String: String] = [
+		"AboutCell": "aboutCellId",
+		"DateFormatCell": "dateFormatCellId",
+		"CubeCaseCell": "cubeCaseCellId",
+		"FormCell": "formCellId",
+		"SessionCell": "sessionCellId",
+		"SliderCell": "sliderCellId",
+		"SettingsCell": "settingsCellId",
+		"StatsCell": "statsCellId"
+	]
+	
 	func loadData() -> Bool {
 		if storage.dictionary(forKey: sessionsKey) != nil {
 //			sessions = storage.dictionary(forKey: sessionsKey) as! [String: [Int]]

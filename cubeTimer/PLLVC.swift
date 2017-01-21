@@ -58,7 +58,7 @@ class PLLViewController:OLLViewController {
 		}
 		//super.viewDidLoad()
 		// do other stuff here
-		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
+		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: caseCellId)
 		
 		
 		
@@ -162,7 +162,7 @@ class PLLViewController:OLLViewController {
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
+		let myCell = tableView.dequeueReusableCell(withIdentifier: caseCellId) as! CubeCaseCell
 		myCell.nameLabel.text = imageNameForLabel(ip: indexPath)
 		myCell.probLabel.text = probLabelText(indexPath: indexPath)
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)

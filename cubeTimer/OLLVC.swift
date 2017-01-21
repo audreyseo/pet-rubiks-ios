@@ -8,12 +8,13 @@
 
 import UIKit
 
-class OLLViewController:UITableViewController {
+class OLLViewController:TableVC {
 	var images:[String] = Array(repeating: "", count: 58)
-	var titles:[String] = ["Learning", "Learned"]
+//	var titles:[String] = ["Learning", "Learned"]
 	var knownCases:[String] = [String]()
 	var isEditingKnown = false
 	var userdef = UserDefaults()
+	var caseCellId: String!
 	
 	var knownCasesKey = "knownCasesKey"
 	var imagesKey = "imagesKey"
@@ -80,7 +81,12 @@ class OLLViewController:UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		caseCellId = self.tbc.cellReuseIds["CubeCaseCell"]
+		
 		registrationStuff()
+		
+		self.titles =  ["Learning", "Learned"]
 		
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 140
@@ -92,7 +98,7 @@ class OLLViewController:UITableViewController {
 			images[i - 1] = "\(i)"
 		}
 		
-		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: "caseCellId")
+		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: caseCellId)
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
 		getKnown()
 		saveKnown()
@@ -200,7 +206,7 @@ class OLLViewController:UITableViewController {
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let myCell = tableView.dequeueReusableCell(withIdentifier: "caseCellId") as! CubeCaseCell
+		let myCell = tableView.dequeueReusableCell(withIdentifier: caseCellId) as! CubeCaseCell
 		myCell.nameLabel.text = nameLabelText(indexPath: indexPath)
 		myCell.probLabel.text = probLabelText(indexPath: indexPath)
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)

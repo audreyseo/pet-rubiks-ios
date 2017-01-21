@@ -14,12 +14,15 @@ class AddSessionViewController:TableVC, UITextFieldDelegate {
 	var itemTypes: [FormCellType] = [FormCellType]()
 	var itemFunctions: [Selector] = [Selector]()
 	var blanks: [UITextField] = [UITextField]()
+	var formId: String! {
+		return self.tbc.cellReuseIds["FormCell"]
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		
-		tableView.register(FormCell.self, forCellReuseIdentifier: "formId")
+		tableView.register(FormCell.self, forCellReuseIdentifier: formId)
 		items = ["Session Name"]
 		itemTypes = [.blankWithButton]
 		itemFunctions = [#selector(runWhenButtonPressed)]
@@ -28,14 +31,15 @@ class AddSessionViewController:TableVC, UITextFieldDelegate {
 	}
 	
 	func doneFunction() {
-		self.navigationController?.popViewController(animated: true)
+		let view = self.navigationController?.popViewController(animated: true)
+		view?.viewWillDisappear(true)
 //		navigationItem.leftBarButtonItem?.target?.perform(navigationItem.backBarButtonItem?.action)
 		self.tbc.newSession(key: session)
 		//		navigationItem.backBarButtonItem?.sendActions(for: .touchUpInside)
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "formId") as! FormCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: formId) as! FormCell
 		cell.nameLabel.text = items[indexPath.row]
 		cell.blank.placeholder = "sessionName"
 		cell.blank.delegate = self
