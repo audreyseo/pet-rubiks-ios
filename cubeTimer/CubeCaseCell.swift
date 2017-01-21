@@ -90,6 +90,10 @@ class CubeCaseCell:UITableViewCell {
 		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
 	}
 	
+	func equalityConstraint(item: Any, other: Any, attributeToUse: NSLayoutAttribute) -> NSLayoutConstraint {
+		return NSLayoutConstraint(item: item, attribute: attributeToUse, relatedBy: .equal, toItem: other, attribute: attributeToUse, multiplier: 1.0, constant: 0.0)
+	}
+	
 	func setupViews() {
 		let viewsDict: [String: Any] = ["v0": imageNameStack, "v1": probLabel, "v2": algStacker]
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
@@ -112,7 +116,9 @@ class CubeCaseCell:UITableViewCell {
 		addLayoutConstraint(format: "V:|-8-[v1]-8-|", viewsDictionary: viewsDict)
 		addLayoutConstraint(format: "V:|-8-[v2]-8-|", viewsDictionary: viewsDict)
 		
-		addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
+		addConstraint(equalityConstraint(item: algStacker, other: self, attributeToUse: .centerY))
+		
+		//addConstraint(NSLayoutConstraint(item: algStacker, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0))
 	}
 	
 	func setupAlgorithmStackView() {
