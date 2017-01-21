@@ -210,6 +210,7 @@ class OLLViewController:UITableViewController {
 		
 		myCell.customImageView.frame.size.width = 50
 		myCell.customImageView.frame.size.height = 50
+		myCell.setupViews()
 		return myCell
 	}
 	

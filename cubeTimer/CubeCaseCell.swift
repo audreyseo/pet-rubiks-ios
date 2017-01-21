@@ -13,7 +13,7 @@ class CubeCaseCell:UITableViewCell {
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		self.imageView?.translatesAutoresizingMaskIntoConstraints = false
-		setupViews()
+//		setupViews()
 	}
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -98,29 +98,34 @@ class CubeCaseCell:UITableViewCell {
 	
 	func setupViews() {
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
-		super.layoutSubviews()
-		self.imageView?.removeFromSuperview()
+//		super.layoutSubviews()
+//		self.imageView?.removeFromSuperview()
 		self.separatorInset = UIEdgeInsets(top: 0, left: 55 + 16, bottom: 0, right: 0)
 		
 		//algStacker.alignment = .center
 		//algStacker.axis = .horizontal
 		if algLabel.text != "" {
+			algLabel.removeFromSuperview()
+			algLabel1.removeFromSuperview()
+			
 			algStacker.addSubview(algLabel)
 			if algLabel1.text != "" {
+//				print("\(algLabel.text)-\(algLabel1.text): Double")
 				algStacker.addSubview(algLabel1)
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel1]))
-				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]->=4-[v1]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel, "v1": algLabel1]))
 				
 			} else {
+//				print("\(algLabel.text)-\(algLabel1.text): Single.")
 				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
-				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-<=8-[v0(40)]-<=8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
+				algStacker.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|->=27-[v0]->=27-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": algLabel]))
 			}
 		}
 		
 		imageNameStack.addSubview(self.customImageView)
 		imageNameStack.addSubview(self.nameLabel)
-		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[v0(50)]-2-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView]))
+		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[v0(50)]-5-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": self.customImageView]))
 		imageNameStack.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[v0(60)]", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": nameLabel]))
 		imageNameStack.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .centerX, relatedBy: .equal, toItem: customImageView, attribute: .centerX, multiplier: 1.0, constant: 0.0))
 		
