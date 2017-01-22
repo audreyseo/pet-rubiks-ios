@@ -14,9 +14,9 @@ class EditableCubeCaseCell: CubeCaseCell {
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		
-		self.contentView.addSubview(imageNameStack)
-		self.contentView.addSubview(algStacker)
-		self.contentView.addSubview(probLabel)
+//		self.contentView.addSubview(imageNameStack)
+//		self.contentView.addSubview(algStacker)
+//		self.contentView.addSubview(probLabel)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -35,6 +35,10 @@ class EditableCubeCaseCell: CubeCaseCell {
 		
 		self.setupImageStackView()
 		self.setupAlgorithmStackView()
+		
+		self.contentView.addSubview(imageNameStack)
+		self.contentView.addSubview(algStacker)
+		self.contentView.addSubview(probLabel)
 		
 		
 		// Add constraints to the cell's view
