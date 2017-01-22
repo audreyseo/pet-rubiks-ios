@@ -82,7 +82,7 @@ class OLLViewController:TableVC {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		caseCellId = self.tbc.cellReuseIds["CubeCaseCell"]
+		caseCellId = self.tbc.cellReuseIds["EditableCubeCaseCell"]
 		
 		registrationStuff()
 		
@@ -98,7 +98,8 @@ class OLLViewController:TableVC {
 			images[i - 1] = "\(i)"
 		}
 		
-		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: caseCellId)
+		tableView.register(EditableCubeCaseCell.self, forCellReuseIdentifier: caseCellId)
+//		tableView.register(CubeCaseCell.self, forCellReuseIdentifier: caseCellId)
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(toggleEditing))
 		getKnown()
 		saveKnown()
@@ -206,7 +207,8 @@ class OLLViewController:TableVC {
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let myCell = tableView.dequeueReusableCell(withIdentifier: caseCellId) as! CubeCaseCell
+		let myCell = tableView.dequeueReusableCell(withIdentifier: caseCellId) as! EditableCubeCaseCell
+//		let myCell = tableView.dequeueReusableCell(withIdentifier: caseCellId) as! CubeCaseCell
 		myCell.nameLabel.text = nameLabelText(indexPath: indexPath)
 		myCell.probLabel.text = probLabelText(indexPath: indexPath)
 		myCell.algLabel.text = firstAlgLabel(ip: indexPath)

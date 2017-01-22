@@ -44,7 +44,7 @@ class PLLViewController:OLLViewController {
 			"21": ["code":"Gd","solve1alg":"(R U R') y' R2 u' R U' R' U R' u R2","solve1length":"13","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"DoubleSpins"],
 			"22": ["code":"Gb","solve1alg":"(R' U' R) y R2 u R' U R U' R u' R2","solve1length":"13","solve2alg":"","solve2length":"0","prob":"\(1.0/18.0)","descript":"DoubleSpins"]
 		]
-		
+		caseCellId = tbc.cellReuseIds["CubeCaseCell"]
 		knownCasesKey = "PLLknownCasesKey"
 		imagesKey = "PLLimagesKey"
 		
